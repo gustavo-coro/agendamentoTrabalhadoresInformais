@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuControle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agendamento de Trabalhadores Informais"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="35dp"/>
+
+
+        <!--LinearLayout que engloba as informaçoes de perfil do usuario-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="35dp"
+            android:layout_marginLeft="25dp">
+
+            <TextView
+                android:id="@+id/nomeUsuarioTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
+                android:text="Usuário"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/descricaoUsuarioTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Descrição"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"/>
+
+
+        <Button
+            android:id="@+id/agendamentoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Agendamento"
+            android:textSize="20sp"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/agendaMenuBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agenda"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/editarAgendaMenuBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Agenda"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp">
+
+        </Button>
+
+        <Button
+            android:id="@+id/pedidosBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Pedidos de Trabalho"
+            android:textSize="20sp"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sair"
+            android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_agenda.xml" value="0.25" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_agenda_menu.xml" value="0.22" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_agendamento_trabalho.xml" value="0.25" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_cadastro.xml" value="0.22" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_controlar_pedido_trabalho.xml" value="0.20416666666666666" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_edit_agenda.xml" value="0.1" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_editar_agenda.xml" value="0.2938388625592417" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_listar_trabalhadores.xml" value="0.20416666666666666" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_main.xml" value="0.19947916666666668" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_menu_controle.xml" value="0.25" />
+        <entry key="..\:/Aplicativos/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_trabalhos_concluidos.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/55319/OneDrive/Desktop/dever/top_ des_ software/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_agenda_menu.xml" value="0.22" />
+        <entry key="..\:/Users/55319/OneDrive/Desktop/dever/top_ des_ software/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_cadastro.xml" value="0.22" />
+        <entry key="..\:/Users/55319/OneDrive/Desktop/dever/top_ des_ software/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_controlar_pedido_trabalho.xml" value="0.1" />
+        <entry key="..\:/Users/55319/OneDrive/Desktop/dever/top_ des_ software/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_edit_agenda.xml" value="0.25" />
+        <entry key="..\:/Users/55319/OneDrive/Desktop/dever/top_ des_ software/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_menu_controle.xml" value="0.22" />
+        <entry key="..\:/Users/55319/OneDrive/Desktop/dever/top_ des_ software/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_trabalhos_concluidos.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
