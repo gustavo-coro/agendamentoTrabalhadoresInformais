@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".Cadastro">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <!--campos de texto referentes as informacoes necessarias para o cadastro-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +34,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginHorizontal="5dp">
 
                 <!--nome-->
                 <TextView
@@ -37,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Nome completo:"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="5dp"
                     android:textSize="17dp"/>
 
                 <EditText
@@ -50,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CPF:"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="5dp"
                     android:textSize="17dp"/>
 
                 <EditText
@@ -63,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email:"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="5dp"
                     android:textSize="17dp"/>
 
                 <EditText
@@ -76,7 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Telefone:"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="5dp"
                     android:textSize="17dp"/>
 
                 <EditText
@@ -89,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Senha:"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="5dp"
                     android:textSize="17dp"/>
 
                 <EditText
@@ -102,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Confirme sua senha:"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="5dp"
                     android:textSize="17dp"/>
 
                 <EditText
@@ -120,6 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="Trabalhador"
+                    android:layout_marginHorizontal="5dp"
                     android:textSize="15dp" />
 
                 <!--botao para concluir o cadastro-->
@@ -153,5 +160,6 @@
             </LinearLayout>
 
         </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

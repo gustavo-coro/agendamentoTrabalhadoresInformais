@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AgendamentoTrabalho extends AppCompatActivity {
@@ -54,7 +55,9 @@ public class AgendamentoTrabalho extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
                 calendarioTemp.set(ano, mes, dia);
-                dataTxt.setText(dia+"/"+(mes+1)+"/"+ano);
+                String pattern = "dd/MM/yyyy";
+                SimpleDateFormat formatador = new SimpleDateFormat(pattern);
+                dataTxt.setText(formatador.format(calendarioTemp.getTime()));
             }
         }, calendarioTemp.get(Calendar.YEAR), calendarioTemp.get(Calendar.MONTH), calendarioTemp.get(Calendar.DAY_OF_MONTH));
 
@@ -64,13 +67,10 @@ public class AgendamentoTrabalho extends AppCompatActivity {
             public void onTimeSet(TimePicker timePicker, int hora, int min) {
                 calendarioTemp.set(calendarioTemp.get(Calendar.YEAR), calendarioTemp.get(Calendar.MONTH), calendarioTemp.get(Calendar.DAY_OF_MONTH), hora, min);
 
-                //variaveis String usadas para formatar o texto da hora
-                String horaTemp = "" + hora;
-                String minTemp = "" + min;
-                if(hora<10){ horaTemp = "0" + hora;}
-                if(min<10){ minTemp = "0" + min;}
+                String pattern = "HH:mm";
+                SimpleDateFormat formatador = new SimpleDateFormat(pattern);
 
-                horaTxt.setText(horaTemp+":"+minTemp);
+                horaTxt.setText(formatador.format(calendarioTemp.getTime()));
             }
         }, calendarioTemp.get(Calendar.HOUR), calendarioTemp.get(Calendar.MINUTE), android.text.format.DateFormat.is24HourFormat(AgendamentoTrabalho.this));
 

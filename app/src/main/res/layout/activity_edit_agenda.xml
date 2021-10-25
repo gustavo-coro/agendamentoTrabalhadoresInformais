@@ -6,59 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".EditAgenda">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <!--Título-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Editar Agenda"
-            android:textSize="35dp"
-            android:gravity="center"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp">
 
-
-        </TextView>
-
-        <!--Layout com as check boxes-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <CheckBox
-                android:layout_width="wrap_content"
+            <!--Título-->
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Exibir somente trabalhos ativos"
-                android:textSize="15dp">
+                android:text="Editar Agenda"
+                android:textSize="35dp"
+                android:gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp">
 
-            </CheckBox>
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Modo Visualização"
-                android:textSize="15dp">
+            </TextView>
 
-            </CheckBox>
+            <!--Layout com as check boxes-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <!--Botão cancelar trabalho-->
-            <Button
-                android:id="@+id/cancelarTrabBtn"
-                android:layout_width="195dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="CANCELAR TRABALHO"
-                android:textSize="20dp"
-                android:layout_marginTop="25dp">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Exibir somente trabalhos ativos"
+                    android:textSize="15dp">
 
-            </Button>
+                </CheckBox>
 
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Modo Visualização"
+                    android:textSize="15dp">
+                </CheckBox>
+
+                <ListView
+                    android:id="@+id/listaAgendaList"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"/>
+
+                <!--Botão cancelar trabalho-->
+                <Button
+                    android:id="@+id/cancelarTrabBtn"
+                    android:layout_width="195dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Cancelar Trabalho"
+                    android:textSize="20dp"
+                    android:layout_marginVertical="15dp">
+                </Button>
+
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
