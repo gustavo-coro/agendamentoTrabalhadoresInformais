@@ -48,8 +48,26 @@
 
                 <EditText
                     android:id="@+id/nomeCadastroTxt"
+                    android:inputType="textCapWords|textAutoCorrect"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
+
+                <!--data de nascimento-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data de nascimento:"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/dataNascTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="01/01/1970"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="5dp"/>
 
                 <!--cpf-->
                 <TextView
@@ -57,10 +75,26 @@
                     android:layout_height="wrap_content"
                     android:text="CPF:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:id="@+id/cpfCadastroTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!--endereco-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Endereço:"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"/>
+
+                <EditText
+                    android:id="@+id/enderecoCadastroTxt"
+                    android:inputType="textCapWords|textAutoCorrect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -70,10 +104,12 @@
                     android:layout_height="wrap_content"
                     android:text="Email:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:id="@+id/emailCadastroTxt"
+                    android:inputType="textEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -83,10 +119,12 @@
                     android:layout_height="wrap_content"
                     android:text="Telefone:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:id="@+id/celularCadastroTxt"
+                    android:inputType="phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -96,10 +134,12 @@
                     android:layout_height="wrap_content"
                     android:text="Senha:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:id="@+id/senhaCadastroTxt"
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -109,10 +149,12 @@
                     android:layout_height="wrap_content"
                     android:text="Confirme sua senha:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp"
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:id="@+id/senhaConfirmCadastroTxt"
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -121,45 +163,55 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                <!--confirmacao de ocupacao-->
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:text="Trabalhador"
-                    android:layout_marginHorizontal="5dp"
-                    android:textSize="15dp" />
 
-                <!--botao para concluir o cadastro-->
-                <Button
-                    android:id="@+id/concluirCadastroBtn"
-                    android:layout_width="230dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:text="Cadastrar"
-                    android:textSize="15sp"
-                    android:gravity="center">
+                    <!--confirmacao de ocupacao-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Se cadastrar como trabalhador?"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="17dp"
+                        android:layout_marginTop="5dp"/>
+                    <CheckBox
+                        android:id="@+id/usuarioCheck"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:text="Trabalhador"
+                        android:layout_marginHorizontal="5dp"
+                        android:textSize="15dp" />
 
-                </Button>
+                    <!--botao para concluir o cadastro-->
+                    <Button
+                        android:id="@+id/concluirCadastroBtn"
+                        android:layout_width="230dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:text="Cadastrar"
+                        android:textSize="15sp"
+                        android:gravity="center">
 
-                <!--botao para voltar a tela de login-->
-                <Button
-                    android:id="@+id/voltarLoginBtn"
-                    android:layout_width="230dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Voltar ao login"
-                    android:textSize="15sp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="15dp">
+                    </Button>
 
-                </Button>
+                    <!--botao para voltar a tela de login-->
+                    <Button
+                        android:id="@+id/voltarLoginBtn"
+                        android:layout_width="230dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Voltar ao login"
+                        android:textSize="15sp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp">
+
+                    </Button>
 
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

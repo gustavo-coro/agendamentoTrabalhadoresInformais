@@ -21,7 +21,7 @@
             android:textSize="30sp"
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="35dp"/>
 
         <!--LinearLayout que engloba o campo onde o usuario ira digitar suas informacoes-->
@@ -39,15 +39,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginBottom="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Telefone:"
-                    android:textSize="24sp"
-                    android:layout_marginRight="10dp"/>
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
 
                 <EditText
                     android:id="@+id/telefoneTxt"
@@ -62,14 +62,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Senha:"
-                    android:textSize="24sp"
-                    android:layout_marginRight="10dp"/>
+                    android:textSize="18sp"
+                    android:layout_marginBottom="5dp"/>
 
                 <EditText
                     android:id="@+id/senhaTxt"
@@ -88,14 +88,14 @@
             android:text="Entrar"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
-            android:textSize="18sp"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ainda não possui conta?"
             android:layout_gravity="center"
-            android:textSize="15sp"/>
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/cadastrarBtn"
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:text="Cadastre-se"
             android:layout_gravity="center"
-            android:textSize="18sp"/>
+            android:textSize="20sp"/>
 
     </LinearLayout>
 

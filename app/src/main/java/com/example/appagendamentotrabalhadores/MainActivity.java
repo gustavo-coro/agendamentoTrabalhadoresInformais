@@ -7,6 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
+import ferramentas.UsuarioDb;
+import modelo.Usuario;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText senhaTxt;
     private Button entrarBtn;
     private Button cadastrarBtn;
+    private ArrayList<Usuario> usuarioLogin;
 
 
     @Override
@@ -37,9 +44,17 @@ public class MainActivity extends AppCompatActivity {
         entrarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent trocaAct = new Intent(MainActivity.this, MenuControle.class);
+                confirmaLogin();
 
-                startActivity(trocaAct);
+                if(usuarioLogin.isEmpty()){
+
+                    Toast.makeText(MainActivity.this, "Telefone ou senha incorretos.", Toast.LENGTH_LONG).show();
+
+                }else {
+                    Intent trocaAct = new Intent(MainActivity.this, MenuControle.class);
+
+                    startActivity(trocaAct);
+                }
             }
         });
 
@@ -52,6 +67,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void confirmaLogin(){
+
+        usuarioLogin = new ArrayList<>();
+
+        String telefone = telefoneTxt.getText().toString();
+        String senha = senhaTxt.getText().toString();
+
+        UsuarioDb db = new UsuarioDb(MainActivity.this);
+        usuarioLogin = db.buscaUsuarioLogin(telefone, senha);
+
+
 
     }
 

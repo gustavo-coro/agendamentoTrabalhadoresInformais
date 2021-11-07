@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
     private DatePickerDialog calendarioUsuario;
     private TimePickerDialog horaUsuario;
     private Calendar calendarioTemp;
+    private Calendar dataAtual;
 
     private TextView trabalhadorTxt;
     private Spinner tipoServicoSpnr;
@@ -42,22 +44,49 @@ public class AgendamentoTrabalho extends AppCompatActivity {
         confirmarBtn = (Button) findViewById(R.id.confirmarBtn);
         cancelarBtn = (Button) findViewById(R.id.cancelarBtn);
 
+        //pega a data atual do celular do usuario
+        dataAtual = Calendar.getInstance();
+        calendarioTemp = Calendar.getInstance();
+        mostraDataAtual();
+
         //responsavel por chamar todos os eventos dos botoes
         agendamentoEventos();
 
     }
 
+    private void mostraDataAtual(){
+
+        String pattern = "dd/MM/yyyy";
+        SimpleDateFormat formatador = new SimpleDateFormat(pattern);
+        dataTxt.setText(formatador.format(calendarioTemp.getTime()));
+
+        pattern = "HH:mm";
+        formatador = new SimpleDateFormat(pattern);
+        horaTxt.setText(formatador.format(calendarioTemp.getTime()));
+
+    }
+
     private void agendamentoEventos(){
 
-        //variaveis a serem usadas na selecao de data de cada agendamento
-        calendarioTemp = Calendar.getInstance();
+        //metodo usado na data de cada agendamento
         calendarioUsuario = new DatePickerDialog(AgendamentoTrabalho.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
                 calendarioTemp.set(ano, mes, dia);
+
+                if(calendarioTemp.before(dataAtual)){
+
+                    calendarioTemp = Calendar.getInstance();
+                    Toast toast = Toast.makeText(AgendamentoTrabalho.this, "Você não pode selecionar uma data no passado.", Toast.LENGTH_LONG);
+                    toast.show();
+                    mostraDataAtual();
+
+                }
+
                 String pattern = "dd/MM/yyyy";
                 SimpleDateFormat formatador = new SimpleDateFormat(pattern);
                 dataTxt.setText(formatador.format(calendarioTemp.getTime()));
+
             }
         }, calendarioTemp.get(Calendar.YEAR), calendarioTemp.get(Calendar.MONTH), calendarioTemp.get(Calendar.DAY_OF_MONTH));
 
@@ -66,6 +95,15 @@ public class AgendamentoTrabalho extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int hora, int min) {
                 calendarioTemp.set(calendarioTemp.get(Calendar.YEAR), calendarioTemp.get(Calendar.MONTH), calendarioTemp.get(Calendar.DAY_OF_MONTH), hora, min);
+
+                if(calendarioTemp.before(dataAtual)){
+
+                    calendarioTemp = Calendar.getInstance();
+                    Toast toast = Toast.makeText(AgendamentoTrabalho.this, "Você não pode selecionar um horário no passado.", Toast.LENGTH_LONG);
+                    toast.show();
+                    mostraDataAtual();
+
+                }
 
                 String pattern = "HH:mm";
                 SimpleDateFormat formatador = new SimpleDateFormat(pattern);
