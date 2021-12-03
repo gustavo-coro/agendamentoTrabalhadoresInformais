@@ -20,7 +20,6 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
     private Button cancelarBtn;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +39,7 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
 
     }
 
-    private void controlaPedidoEvento(){
+    private void controlaPedidoEvento() {
 
 
         recusarBtn.setOnClickListener(new View.OnClickListener() {

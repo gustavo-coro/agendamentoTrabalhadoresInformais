@@ -1,110 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:fillViewport="true">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:context=".MainActivity">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Agendamento de Trabalhadores Informais"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="35dp"/>
-
-        <!--LinearLayout que engloba o campo onde o usuario ira digitar suas informacoes-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="30dp"
-            >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <!--LinearLayout que engloba o campo de telefone-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="35dp"
+                android:text="Agendamento de Trabalhadores Informais"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <!--LinearLayout que engloba o campo onde o usuario ira digitar suas informacoes-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Telefone:"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="5dp"/>
-
-                <EditText
-                    android:id="@+id/telefoneTxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:textSize="20sp"/>
-
-            </LinearLayout>
-
-            <!--LinearLayout que engloba o campo de senha-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="30dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Senha:"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="5dp"/>
-
-                <EditText
-                    android:id="@+id/senhaTxt"
+                <!--LinearLayout que engloba o campo de telefone-->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:textSize="20sp"/>
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Telefone:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/telefoneTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <!--LinearLayout que engloba o campo de senha-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="Senha:"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/senhaTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/entrarBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:text="Entrar"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Ainda não possui conta?"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/cadastrarBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Cadastre-se"
+                android:textSize="20sp" />
+
         </LinearLayout>
-
-        <Button
-            android:id="@+id/entrarBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Entrar"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ainda não possui conta?"
-            android:layout_gravity="center"
-            android:textSize="18sp"/>
-
-        <Button
-            android:id="@+id/cadastrarBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cadastre-se"
-            android:layout_gravity="center"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

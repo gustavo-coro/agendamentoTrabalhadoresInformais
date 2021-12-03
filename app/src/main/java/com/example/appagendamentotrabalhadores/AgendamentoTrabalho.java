@@ -54,7 +54,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
 
     }
 
-    private void mostraDataAtual(){
+    private void mostraDataAtual() {
 
         String pattern = "dd/MM/yyyy";
         SimpleDateFormat formatador = new SimpleDateFormat(pattern);
@@ -66,7 +66,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
 
     }
 
-    private void agendamentoEventos(){
+    private void agendamentoEventos() {
 
         //metodo usado na data de cada agendamento
         calendarioUsuario = new DatePickerDialog(AgendamentoTrabalho.this, new DatePickerDialog.OnDateSetListener() {
@@ -74,7 +74,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
                 calendarioTemp.set(ano, mes, dia);
 
-                if(calendarioTemp.before(dataAtual)){
+                if (calendarioTemp.before(dataAtual)) {
 
                     calendarioTemp = Calendar.getInstance();
                     Toast toast = Toast.makeText(AgendamentoTrabalho.this, "Você não pode selecionar uma data no passado.", Toast.LENGTH_LONG);
@@ -96,7 +96,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
             public void onTimeSet(TimePicker timePicker, int hora, int min) {
                 calendarioTemp.set(calendarioTemp.get(Calendar.YEAR), calendarioTemp.get(Calendar.MONTH), calendarioTemp.get(Calendar.DAY_OF_MONTH), hora, min);
 
-                if(calendarioTemp.before(dataAtual)){
+                if (calendarioTemp.before(dataAtual)) {
 
                     calendarioTemp = Calendar.getInstance();
                     Toast toast = Toast.makeText(AgendamentoTrabalho.this, "Você não pode selecionar um horário no passado.", Toast.LENGTH_LONG);

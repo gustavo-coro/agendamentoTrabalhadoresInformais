@@ -27,7 +27,7 @@ public class TrabalhosConcluidos extends AppCompatActivity {
         menuEvento();
     }
 
-    private void menuEvento(){
+    private void menuEvento() {
 
         voltarBtn.setOnClickListener(new View.OnClickListener() {
             @Override

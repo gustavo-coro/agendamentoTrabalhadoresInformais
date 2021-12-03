@@ -31,7 +31,7 @@ public class ListarTrabalhadores extends AppCompatActivity {
 
     }
 
-    private void listarTrabalhadoresEventos(){
+    private void listarTrabalhadoresEventos() {
 
         confirmaBtn.setOnClickListener(new View.OnClickListener() {
             @Override

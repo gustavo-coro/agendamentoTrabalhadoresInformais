@@ -16,7 +16,7 @@ public class UsuarioDb extends SQLiteOpenHelper {
 
     private Context context;
 
-    public UsuarioDb(Context context){
+    public UsuarioDb(Context context) {
 
         super(context, "usuario", null, 1);
         this.context = context;
@@ -27,16 +27,16 @@ public class UsuarioDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         final String criaTabela = "CREATE TABLE IF NOT EXISTS usuario (id INTEGER PRIMARY KEY AUTOINCREMENT," +
-        "nome TEXT, endereco TEXT, datanasc DATE, email TEXT, telefone TEXT, cpf TEXT," +
-        "descricao TEXT, senha TEXT)";
+                "nome TEXT, endereco TEXT, datanasc DATE, email TEXT, telefone TEXT, cpf TEXT," +
+                "descricao TEXT, senha TEXT)";
 
         db.execSQL(criaTabela);
 
     }
 
-    public void insereUsuario(Usuario novoUsuario){
+    public void insereUsuario(Usuario novoUsuario) {
 
-        try(SQLiteDatabase db = this.getWritableDatabase()){
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
 
             ContentValues valores = new ContentValues();
 
@@ -51,33 +51,33 @@ public class UsuarioDb extends SQLiteOpenHelper {
 
             db.insert("usuario", null, valores);
 
-        }catch(SQLiteException ex){
+        } catch (SQLiteException ex) {
             ex.printStackTrace();
         }
 
     }
 
-    public void atualizaUsuario(){
+    public void atualizaUsuario() {
 
     }
 
-    public ArrayList<Usuario> buscaUsuarioLogin(String telefone, String senha){
+    public ArrayList<Usuario> buscaUsuarioLogin(String telefone, String senha) {
 
         ArrayList<Usuario> resultado = new ArrayList<>();
 
         String sql = "SELECT * FROM usuario";
 
-        try(SQLiteDatabase db = this.getWritableDatabase()){
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
 
             Cursor tuplas = db.rawQuery(sql, null);
 
-            if(tuplas.moveToFirst()){
+            if (tuplas.moveToFirst()) {
 
-                do{
+                do {
                     String tel = tuplas.getString(5);
                     String password = tuplas.getString(8);
 
-                    if(tel.equals(telefone) && password.equals(senha)) {
+                    if (tel.equals(telefone) && password.equals(senha)) {
                         int id = tuplas.getInt(0);
                         String nome = tuplas.getString(1);
                         String endereco = tuplas.getString(2);
@@ -91,11 +91,11 @@ public class UsuarioDb extends SQLiteOpenHelper {
                         resultado.add(user);
                     }
 
-                }while (tuplas.moveToNext());
+                } while (tuplas.moveToNext());
 
             }
 
-        }catch(SQLiteException ex){
+        } catch (SQLiteException ex) {
             System.err.println("erro na consulta com o banco de dados.");
             ex.printStackTrace();
         }
@@ -104,39 +104,39 @@ public class UsuarioDb extends SQLiteOpenHelper {
 
     }
 
-    public int buscaUsuarioCadastro(Usuario confirmaUsuario){
+    public int buscaUsuarioCadastro(Usuario confirmaUsuario) {
 
         int confirma = 0;
 
         String sql = "SELECT * FROM usuario";
 
-        try(SQLiteDatabase db = this.getWritableDatabase()){
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
 
             Cursor tuplas = db.rawQuery(sql, null);
 
-            if(tuplas.moveToFirst()){
+            if (tuplas.moveToFirst()) {
 
-                do{
+                do {
                     String tel = tuplas.getString(5);
                     String nome = tuplas.getString(1);
                     String email = tuplas.getString(4);
                     String cpf = tuplas.getString(6);
 
-                    if(confirmaUsuario.getNome().equals(nome)){
+                    if (confirmaUsuario.getNome().equals(nome)) {
                         confirma = 1;
-                    }else if(confirmaUsuario.getCpf().equals(cpf)){
+                    } else if (confirmaUsuario.getCpf().equals(cpf)) {
                         confirma = 2;
-                    }else if(confirmaUsuario.getEmail().equals(email)){
+                    } else if (confirmaUsuario.getEmail().equals(email)) {
                         confirma = 3;
-                    }else if(confirmaUsuario.getTelefone().equals(tel)){
+                    } else if (confirmaUsuario.getTelefone().equals(tel)) {
                         confirma = 4;
                     }
 
-                }while (tuplas.moveToNext());
+                } while (tuplas.moveToNext());
 
             }
 
-        }catch(SQLiteException ex){
+        } catch (SQLiteException ex) {
             System.err.println("erro na consulta com o banco de dados.");
             ex.printStackTrace();
         }

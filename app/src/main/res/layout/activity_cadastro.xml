@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Cadastro">
+    android:fillViewport="true">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:context=".Cadastro">
 
         <!--campos de texto referentes as informacoes necessarias para o cadastro-->
         <LinearLayout
@@ -25,58 +26,58 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Cadastro"
                     android:layout_gravity="center"
-                    android:textSize="30dp"
-                    android:layout_marginVertical="10dp"/>
+                    android:layout_marginVertical="10dp"
+                    android:text="Cadastro"
+                    android:textSize="30dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:orientation="vertical">
 
                 <!--nome-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Nome completo:"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="17dp"/>
+                    android:textSize="17dp" />
 
                 <EditText
                     android:id="@+id/nomeCadastroTxt"
-                    android:inputType="textCapWords|textAutoCorrect"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords|textAutoCorrect" />
 
                 <!--data de nascimento-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Data de nascimento:"
-                    android:textSize="17sp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="Data de nascimento:"
+                    android:textSize="17sp" />
 
                 <TextView
                     android:id="@+id/dataNascTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="01/01/1970"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="5dp"/>
+                    android:textSize="20sp" />
 
                 <!--cpf-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CPF:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="CPF:"
+                    android:textSize="17dp" />
 
                 <EditText
                     android:id="@+id/cpfCadastroTxt"
@@ -87,76 +88,76 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Endereço:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="Endereço:"
+                    android:textSize="17dp" />
 
                 <EditText
                     android:id="@+id/enderecoCadastroTxt"
-                    android:inputType="textCapWords|textAutoCorrect"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords|textAutoCorrect" />
 
                 <!--email-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="Email:"
+                    android:textSize="17dp" />
 
                 <EditText
                     android:id="@+id/emailCadastroTxt"
-                    android:inputType="textEmailAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
 
                 <!--telefone-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Telefone:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="Telefone:"
+                    android:textSize="17dp" />
 
                 <EditText
                     android:id="@+id/celularCadastroTxt"
-                    android:inputType="phone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
 
                 <!--senha-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Senha:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="Senha:"
+                    android:textSize="17dp" />
 
                 <EditText
                     android:id="@+id/senhaCadastroTxt"
-                    android:inputType="textPassword"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
 
                 <!--confirmacao de senha-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Confirme sua senha:"
                     android:layout_marginLeft="5dp"
-                    android:textSize="17dp"
-                    android:layout_marginTop="5dp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="Confirme sua senha:"
+                    android:textSize="17dp" />
 
                 <EditText
                     android:id="@+id/senhaConfirmCadastroTxt"
-                    android:inputType="textPassword"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -168,16 +169,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Se cadastrar como trabalhador?"
                         android:layout_marginLeft="5dp"
-                        android:textSize="17dp"
-                        android:layout_marginTop="5dp"/>
+                        android:layout_marginTop="5dp"
+                        android:text="Se cadastrar como trabalhador?"
+                        android:textSize="17dp" />
+
                     <CheckBox
                         android:id="@+id/usuarioCheck"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:text="Trabalhador"
                         android:layout_marginHorizontal="5dp"
+                        android:text="Trabalhador"
                         android:textSize="15dp" />
 
                     <!--botao para concluir o cadastro-->
@@ -187,9 +189,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
+                        android:gravity="center"
                         android:text="Cadastrar"
-                        android:textSize="15sp"
-                        android:gravity="center">
+                        android:textSize="15sp">
 
                     </Button>
 
@@ -198,20 +200,16 @@
                         android:id="@+id/voltarLoginBtn"
                         android:layout_width="230dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Voltar ao login"
-                        android:textSize="15sp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="15dp">
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="Voltar ao login"
+                        android:textSize="15sp">
 
                     </Button>
 
                 </LinearLayout>
-
             </LinearLayout>
-
         </LinearLayout>
-
-    </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -39,7 +39,7 @@ public class MenuControle extends AppCompatActivity {
 
     }
 
-    private void menuEvento(){
+    private void menuEvento() {
 
         agendamentoBtn.setOnClickListener(new View.OnClickListener() {
             @Override

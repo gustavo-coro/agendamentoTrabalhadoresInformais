@@ -29,7 +29,7 @@ public class EditAgenda extends AppCompatActivity {
         menuEvento();
     }
 
-    private void menuEvento(){
+    private void menuEvento() {
 
         cancelarTrabBtn.setOnClickListener(new View.OnClickListener() {
             @Override

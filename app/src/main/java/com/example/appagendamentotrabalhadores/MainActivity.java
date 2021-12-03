@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().hide();
+
         telefoneTxt = (EditText) findViewById(R.id.telefoneTxt);
         senhaTxt = (EditText) findViewById(R.id.senhaTxt);
         entrarBtn = (Button) findViewById(R.id.entrarBtn);
@@ -39,18 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loginEvento(){
+    private void loginEvento() {
 
         entrarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 confirmaLogin();
 
-                if(usuarioLogin.isEmpty()){
+                if (usuarioLogin.isEmpty()) {
 
                     Toast.makeText(MainActivity.this, "Telefone ou senha incorretos.", Toast.LENGTH_LONG).show();
 
-                }else {
+                } else {
                     Intent trocaAct = new Intent(MainActivity.this, MenuControle.class);
 
                     startActivity(trocaAct);
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void confirmaLogin(){
+    private void confirmaLogin() {
 
         usuarioLogin = new ArrayList<>();
 
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
         UsuarioDb db = new UsuarioDb(MainActivity.this);
         usuarioLogin = db.buscaUsuarioLogin(telefone, senha);
-
 
 
     }

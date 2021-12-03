@@ -53,8 +53,8 @@ public class Cadastro extends AppCompatActivity {
         cpfTxt = (EditText) findViewById(R.id.cpfCadastroTxt);
         enderecoTxt = (EditText) findViewById(R.id.enderecoCadastroTxt);
         emailTxt = (EditText) findViewById(R.id.emailCadastroTxt);
-        celularTxt =(EditText)  findViewById(R.id.celularCadastroTxt);
-        senhaTxt = (EditText)  findViewById(R.id.senhaCadastroTxt);
+        celularTxt = (EditText) findViewById(R.id.celularCadastroTxt);
+        senhaTxt = (EditText) findViewById(R.id.senhaCadastroTxt);
         senhaConfirmTxt = (EditText) findViewById(R.id.senhaConfirmCadastroTxt);
         usuarioCheck = (CheckBox) findViewById(R.id.usuarioCheck);
         cdtBtn = (Button) findViewById(R.id.concluirCadastroBtn);
@@ -68,7 +68,7 @@ public class Cadastro extends AppCompatActivity {
         event();
     }
 
-    private void mostraData(){
+    private void mostraData() {
 
         String pattern = "dd/MM/yyyy";
         SimpleDateFormat formatador = new SimpleDateFormat(pattern);
@@ -78,20 +78,20 @@ public class Cadastro extends AppCompatActivity {
 
     //metodo usado para calcular a idade do usuario
     //se ele for menor de 18, nao podera se cadastrar
-    public static  int calculaIdade (int ano, int mes, int dia){
+    public static int calculaIdade(int ano, int mes, int dia) {
 
         Calendar hoje = Calendar.getInstance();
         Calendar dataN = Calendar.getInstance();
         dataN.set(mes, dia);
         int idade = hoje.get(Calendar.YEAR) - ano;
-        if((hoje.get(Calendar.MONTH) < mes) || (hoje.get(Calendar.MONTH) == mes && hoje.get(Calendar.DAY_OF_MONTH) < dia)){
+        if ((hoje.get(Calendar.MONTH) < mes) || (hoje.get(Calendar.MONTH) == mes && hoje.get(Calendar.DAY_OF_MONTH) < dia)) {
             idade--;
         }
         return idade;
 
     }
 
-    private void event(){
+    private void event() {
 
         //metodo usado na data de nascimento
         calendarioUsuario = new DatePickerDialog(Cadastro.this, new DatePickerDialog.OnDateSetListener() {
@@ -99,14 +99,14 @@ public class Cadastro extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
 
                 idade = calculaIdade(ano, mes, dia);
-                if(idade < 18){
+                if (idade < 18) {
 
                     dataUsuario = Calendar.getInstance();
                     Toast toast = Toast.makeText(Cadastro.this, "Você precisa ser maior de 18 para se cadastrar.", Toast.LENGTH_LONG);
                     toast.show();
                     mostraData();
 
-                }else {
+                } else {
                     dataUsuario.set(ano, mes, dia);
                     String pattern = "dd/MM/yyyy";
                     SimpleDateFormat formatador = new SimpleDateFormat(pattern);
@@ -119,7 +119,14 @@ public class Cadastro extends AppCompatActivity {
         cdtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cadastrarUsuario();
+                boolean confirma = confirmaPreenchimento();
+                if (confirma == true) {
+                    cadastrarUsuario();
+                } else {
+                    Toast toast = Toast.makeText(Cadastro.this, "Um ou mais campos não foram preenchidos.", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
             }
         });
 
@@ -134,25 +141,47 @@ public class Cadastro extends AppCompatActivity {
 
         dataNascTxt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { calendarioUsuario.show(); }
+            public void onClick(View view) {
+                calendarioUsuario.show();
+            }
         });
 
     }
 
-    private void cadastrarUsuario(){
+    private boolean confirmaPreenchimento() {
+        boolean conf = true;
 
-        if(idade < 18){
+        if (nomeTxt.getText().toString().isEmpty()) {
+            conf = false;
+        } else if (celularTxt.getText().toString().isEmpty()) {
+            conf = false;
+        } else if (senhaTxt.getText().toString().isEmpty()) {
+            conf = false;
+        } else if (cpfTxt.getText().toString().isEmpty()) {
+            conf = false;
+        } else if (emailTxt.getText().toString().isEmpty()) {
+            conf = false;
+        } else if (enderecoTxt.getText().toString().isEmpty()) {
+            conf = false;
+        }
+
+        return conf;
+    }
+
+    private void cadastrarUsuario() {
+
+        if (idade < 18) {
 
             dataUsuario = Calendar.getInstance();
             Toast toast = Toast.makeText(Cadastro.this, "Selecione uma data de nascimento válida.", Toast.LENGTH_LONG);
             toast.show();
             mostraData();
 
-        }else {
+        } else {
 
             String senha = senhaTxt.getText().toString();
             String confirmaSenha = senhaConfirmTxt.getText().toString();
-            if(senha.equals(confirmaSenha)) {
+            if (senha.equals(confirmaSenha)) {
 
                 String nome = nomeTxt.getText().toString();
                 String endereco = enderecoTxt.getText().toString();
@@ -177,20 +206,20 @@ public class Cadastro extends AppCompatActivity {
                     UsuarioDb db = new UsuarioDb(Cadastro.this);
                     int confirma = db.buscaUsuarioCadastro(novoUsuario);
 
-                    if(confirma == 0){
+                    if (confirma == 0) {
                         //cadastra usuario no bd
                         db.insereUsuario(novoUsuario);
                         Toast.makeText(Cadastro.this, "Cadastro feito com sucesso.", Toast.LENGTH_LONG).show();
 
                         finish();
 
-                    }else if(confirma == 1){
+                    } else if (confirma == 1) {
                         Toast.makeText(Cadastro.this, "Erro! Nome de usuário já registrado.", Toast.LENGTH_LONG).show();
-                    }else if(confirma == 2){
+                    } else if (confirma == 2) {
                         Toast.makeText(Cadastro.this, "Erro! CPF já registrado.", Toast.LENGTH_LONG).show();
-                    }else if(confirma == 3){
+                    } else if (confirma == 3) {
                         Toast.makeText(Cadastro.this, "Erro! Email já registrado.", Toast.LENGTH_LONG).show();
-                    }else if(confirma == 4){
+                    } else if (confirma == 4) {
                         Toast.makeText(Cadastro.this, "Erro! Telefone já registrado.", Toast.LENGTH_LONG).show();
                     }
 
@@ -198,7 +227,7 @@ public class Cadastro extends AppCompatActivity {
                     System.err.println("erro no formato da data...");
                 }
 
-            }else{
+            } else {
                 Toast toast = Toast.makeText(Cadastro.this, "As senhas não combinam.", Toast.LENGTH_LONG);
                 toast.show();
             }
