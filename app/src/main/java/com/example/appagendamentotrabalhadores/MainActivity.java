@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+
 import java.util.ArrayList;
 
 import ferramentas.UsuarioDb;
@@ -35,10 +38,19 @@ public class MainActivity extends AppCompatActivity {
         entrarBtn = (Button) findViewById(R.id.entrarBtn);
         cadastrarBtn = (Button) findViewById(R.id.cadastrarBtn);
 
+        mascaraTelefone(telefoneTxt);
+
         //responsavel por chamar todos os eventos dos botoes
         loginEvento();
 
 
+    }
+
+    //criando mascara para o telefone
+    private void mascaraTelefone(EditText tel) {
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
+        MaskTextWatcher mtw = new MaskTextWatcher(tel, smf);
+        tel.addTextChangedListener(mtw);
     }
 
     private void loginEvento() {

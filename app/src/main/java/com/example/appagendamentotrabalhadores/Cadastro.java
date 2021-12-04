@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -64,10 +67,29 @@ public class Cadastro extends AppCompatActivity {
         dataUsuario = Calendar.getInstance();
         mostraData();
 
+        //aplicando as mascaras nos edittext
+        mascaraTelefone(celularTxt);
+        mascaraCpf(cpfTxt);
+
         //Início dos eventos
         event();
     }
 
+    //criando mascara para o telefone
+    private void mascaraTelefone(EditText tel) {
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
+        MaskTextWatcher mtw = new MaskTextWatcher(tel, smf);
+        tel.addTextChangedListener(mtw);
+    }
+
+    //criando mascara para o cpf
+    private void mascaraCpf(EditText cpf) {
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
+        MaskTextWatcher mtw = new MaskTextWatcher(cpf, smf);
+        cpf.addTextChangedListener(mtw);
+    }
+
+    //metodo usado para mostrar a data atual quando o usuario abre a tela
     private void mostraData() {
 
         String pattern = "dd/MM/yyyy";
@@ -78,7 +100,7 @@ public class Cadastro extends AppCompatActivity {
 
     //metodo usado para calcular a idade do usuario
     //se ele for menor de 18, nao podera se cadastrar
-    public static int calculaIdade(int ano, int mes, int dia) {
+    private static int calculaIdade(int ano, int mes, int dia) {
 
         Calendar hoje = Calendar.getInstance();
         Calendar dataN = Calendar.getInstance();
@@ -133,8 +155,8 @@ public class Cadastro extends AppCompatActivity {
         voltaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent nextAct = new Intent(Cadastro.this, MainActivity.class);
 
+                Intent nextAct = new Intent(Cadastro.this, MainActivity.class);
                 startActivity(nextAct);
             }
         });

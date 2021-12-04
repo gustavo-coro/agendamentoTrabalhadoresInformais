@@ -82,7 +82,8 @@
                 <EditText
                     android:id="@+id/cpfCadastroTxt"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
 
                 <!--endereco-->
                 <TextView
