@@ -13,8 +13,10 @@ public class Usuario {
     private String cpf;
     private String descricao;
     private String senha;
+    private float mediaAvaliacao;
 
-    public Usuario(String nome, String endereco, Date dataNasc, String email, String telefone, String cpf, String descricao, String senha) {
+    public Usuario(String nome, String endereco, Date dataNasc, String email,
+                   String telefone, String cpf, String descricao, String senha, float mediaAvaliacao) {
         this.nome = nome;
         this.endereco = endereco;
         this.dataNasc = dataNasc;
@@ -23,9 +25,11 @@ public class Usuario {
         this.cpf = cpf;
         this.descricao = descricao;
         this.senha = senha;
+        this.mediaAvaliacao = mediaAvaliacao;
     }
 
-    public Usuario(int id, String nome, String endereco, Date dataNasc, String email, String telefone, String cpf, String descricao, String senha) {
+    public Usuario(int id, String nome, String endereco, Date dataNasc, String email,
+                   String telefone, String cpf, String descricao, String senha, float mediaAvaliacao) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
@@ -35,6 +39,7 @@ public class Usuario {
         this.cpf = cpf;
         this.descricao = descricao;
         this.senha = senha;
+        this.mediaAvaliacao = mediaAvaliacao;
     }
 
     public int getId() {
@@ -107,5 +112,13 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public float getMediaAvaliacao() {
+        return mediaAvaliacao;
+    }
+
+    public void setMediaAvaliacao(Float mediaAvaliacao) {
+        this.mediaAvaliacao = mediaAvaliacao;
     }
 }

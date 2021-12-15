@@ -85,8 +85,9 @@ public class UsuarioDb extends SQLiteOpenHelper {
                         String email = tuplas.getString(4);
                         String cpf = tuplas.getString(6);
                         String descricao = tuplas.getString(7);
+                        float media = 0;
 
-                        Usuario user = new Usuario(id, nome, endereco, data, email, tel, cpf, descricao, password);
+                        Usuario user = new Usuario(id, nome, endereco, data, email, tel, cpf, descricao, password, media);
 
                         resultado.add(user);
                     }

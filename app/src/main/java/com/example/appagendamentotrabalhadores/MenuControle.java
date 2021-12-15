@@ -41,13 +41,24 @@ public class MenuControle extends AppCompatActivity {
 
     private void menuEvento() {
 
+        nomeTxt.setText(GlobalVar.nomeUsuarioLogin);
+        descricaoTxt.setText(GlobalVar.descricaoUsuarioLogin);
+
+        nomeTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent trocaAct = new Intent(MenuControle.this, Cadastro.class);
+                trocaAct.putExtra("acao", 1);
+                startActivity(trocaAct);
+            }
+        });
+
         agendamentoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent trocAct = new Intent(MenuControle.this, ListarTrabalhadores.class);
-
-                startActivity(trocAct);
+                Intent trocaAct = new Intent(MenuControle.this, ListarTrabalhadores.class);
+                startActivity(trocaAct);
 
             }
         });
@@ -57,8 +68,6 @@ public class MenuControle extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent trocaAct = new Intent(MenuControle.this, ControlarPedidoTrabalho.class);
-
-
                 startActivity(trocaAct);
 
             }

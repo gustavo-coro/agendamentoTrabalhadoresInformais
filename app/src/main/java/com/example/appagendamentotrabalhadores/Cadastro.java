@@ -3,8 +3,10 @@ package com.example.appagendamentotrabalhadores;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +17,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +35,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import ferramentas.UsuarioDb;
 import modelo.Usuario;
@@ -33,17 +46,24 @@ public class Cadastro extends AppCompatActivity {
     private DatePickerDialog calendarioUsuario;
     private Calendar dataUsuario;
     private int idade;
+
+    private TextView tituloTxt;
     private EditText nomeTxt;
     private TextView dataNascTxt;
     private EditText cpfTxt;
     private EditText enderecoTxt;
     private EditText emailTxt;
     private EditText celularTxt;
+    private EditText descricaoTxt;
     private EditText senhaTxt;
     private EditText senhaConfirmTxt;
     private CheckBox usuarioCheck;
     private Button cdtBtn;
     private Button voltaBtn;
+
+    //0 - cadastro, 1 - edicao
+    private int operacao = -1;
+    private Usuario usuarioSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +71,14 @@ public class Cadastro extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         //Link entre os atributos java e os componentes XML
+        tituloTxt = (TextView) findViewById(R.id.tituloCadTxt);
         nomeTxt = (EditText) findViewById(R.id.nomeCadastroTxt);
         dataNascTxt = (TextView) findViewById(R.id.dataNascTxt);
         cpfTxt = (EditText) findViewById(R.id.cpfCadastroTxt);
         enderecoTxt = (EditText) findViewById(R.id.enderecoCadastroTxt);
         emailTxt = (EditText) findViewById(R.id.emailCadastroTxt);
         celularTxt = (EditText) findViewById(R.id.celularCadastroTxt);
+        descricaoTxt = (EditText) findViewById(R.id.descricaoCadastroTxt);
         senhaTxt = (EditText) findViewById(R.id.senhaCadastroTxt);
         senhaConfirmTxt = (EditText) findViewById(R.id.senhaConfirmCadastroTxt);
         usuarioCheck = (CheckBox) findViewById(R.id.usuarioCheck);
@@ -65,14 +87,98 @@ public class Cadastro extends AppCompatActivity {
 
         //pega a data atual do dispositivo
         dataUsuario = Calendar.getInstance();
-        mostraData();
+
+        //0 - cadastro, 1 - edição
+        Intent intencao = getIntent();
+        operacao = intencao.getIntExtra("acao", -1);
+        ajustaOperacao();
 
         //aplicando as mascaras nos edittext
         mascaraTelefone(celularTxt);
         mascaraCpf(cpfTxt);
 
-        //Início dos eventos
+        //Início dos eventos dos botões
         event();
+    }
+
+    //Confere se o usuário quer se cadastrar ou editar suas informações
+    private void ajustaOperacao() {
+        if (operacao == 0) {
+            mostraData();
+        } else if (operacao == 1) {
+            tituloTxt.setText("Editar");
+            cdtBtn.setText("Atualizar");
+            voltaBtn.setText("Excluir");
+
+            if (GlobalVar.idUsuario != -1) {
+                RequestQueue pilha = Volley.newRequestQueue(this);
+                String url = GlobalVar.urlServidor + "usuario";
+                StringRequest jsonRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject resposta = new JSONObject(response);
+
+                            if (resposta.getInt("cod") == 200) {
+                                JSONObject obj = resposta.getJSONObject("informacao");
+                                usuarioSelecionado = new Usuario(obj.getInt("id"), obj.getString("nome"),
+                                        obj.getString("endereco"), new Date(obj.getLong("dataNasc")), obj.getString("email"),
+                                        obj.getString("telefone"), obj.getString("cpf"),
+                                        obj.getString("descricao"), obj.getString("senha"), 0);
+
+                                nomeTxt.setText(usuarioSelecionado.getNome());
+                                cpfTxt.setText(usuarioSelecionado.getCpf());
+                                enderecoTxt.setText(usuarioSelecionado.getEndereco());
+                                emailTxt.setText(usuarioSelecionado.getEmail());
+                                celularTxt.setText(usuarioSelecionado.getTelefone());
+                                descricaoTxt.setText(usuarioSelecionado.getDescricao());
+                                senhaTxt.setText(usuarioSelecionado.getSenha());
+                                senhaConfirmTxt.setText(usuarioSelecionado.getSenha());
+
+                                dataUsuario.setTime(usuarioSelecionado.getDataNasc());
+                                mostraData();
+                                idade = calculaIdade(dataUsuario.get(Calendar.YEAR),
+                                        dataUsuario.get(Calendar.MONTH), dataUsuario.get(Calendar.DAY_OF_MONTH));
+
+                            } else {
+                                Toast.makeText(Cadastro.this,
+                                        resposta.getString("informacao"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException ex) {
+                            Toast.makeText(Cadastro.this,
+                                    "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Cadastro.this,
+                                "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
+                    }
+                }) {
+                    protected Map<String, String> getParams() {
+                        Map<String, String> parametros = new HashMap<>();
+
+                        parametros.put("servico", "consulta");
+                        parametros.put("id", GlobalVar.idUsuario + "");
+
+                        return parametros;
+                    }
+                };
+                pilha.add(jsonRequest);
+
+            } else {
+                Toast toast = Toast.makeText(Cadastro.this,
+                        "Erro na identificação do usuário", Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+        } else {
+            Toast toast = Toast.makeText(Cadastro.this,
+                    "Erro na identificação da ação", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     //criando mascara para o telefone
@@ -101,7 +207,6 @@ public class Cadastro extends AppCompatActivity {
     //metodo usado para calcular a idade do usuario
     //se ele for menor de 18, nao podera se cadastrar
     private static int calculaIdade(int ano, int mes, int dia) {
-
         Calendar hoje = Calendar.getInstance();
         Calendar dataN = Calendar.getInstance();
         dataN.set(mes, dia);
@@ -110,21 +215,18 @@ public class Cadastro extends AppCompatActivity {
             idade--;
         }
         return idade;
-
     }
 
     private void event() {
-
         //metodo usado na data de nascimento
         calendarioUsuario = new DatePickerDialog(Cadastro.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
-
                 idade = calculaIdade(ano, mes, dia);
                 if (idade < 18) {
 
                     dataUsuario = Calendar.getInstance();
-                    Toast toast = Toast.makeText(Cadastro.this, "Você precisa ser maior de 18 para se cadastrar.", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(Cadastro.this, "Você precisa ser maior de 18 para usar o app.", Toast.LENGTH_LONG);
                     toast.show();
                     mostraData();
 
@@ -143,21 +245,39 @@ public class Cadastro extends AppCompatActivity {
             public void onClick(View view) {
                 boolean confirma = confirmaPreenchimento();
                 if (confirma == true) {
-                    cadastrarUsuario();
+                    cadastraEditaUsuario();
                 } else {
                     Toast toast = Toast.makeText(Cadastro.this, "Um ou mais campos não foram preenchidos.", Toast.LENGTH_LONG);
                     toast.show();
                 }
-
             }
         });
 
         voltaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (operacao == 0) {
+                    //eventos do cadastro
+                    Intent nextAct = new Intent(Cadastro.this, MainActivity.class);
+                    startActivity(nextAct);
+                    finish();
+                } else if (operacao == 1) {
+                    //eventos de edição
 
-                Intent nextAct = new Intent(Cadastro.this, MainActivity.class);
-                startActivity(nextAct);
+                    AlertDialog.Builder confirmarExclusao = new AlertDialog.Builder(Cadastro.this);
+                    confirmarExclusao.setTitle("Atencão!");
+                    confirmarExclusao.setMessage("Tem certeza que deseja excluir o registro?");
+                    confirmarExclusao.setCancelable(false);
+                    confirmarExclusao.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            exclusaoUsuario();
+                        }
+                    });
+                    confirmarExclusao.setNegativeButton("Não", null);
+                    confirmarExclusao.setIcon(android.R.drawable.ic_dialog_alert);
+                    confirmarExclusao.show();
+                }
             }
         });
 
@@ -170,6 +290,7 @@ public class Cadastro extends AppCompatActivity {
 
     }
 
+    //Checa se o usuário preencheu todos os campos
     private boolean confirmaPreenchimento() {
         boolean conf = true;
 
@@ -190,7 +311,7 @@ public class Cadastro extends AppCompatActivity {
         return conf;
     }
 
-    private void cadastrarUsuario() {
+    private void cadastraEditaUsuario() {
 
         if (idade < 18) {
 
@@ -210,8 +331,8 @@ public class Cadastro extends AppCompatActivity {
                 String email = emailTxt.getText().toString();
                 String telefone = celularTxt.getText().toString();
                 String cpf = cpfTxt.getText().toString();
-                //futuramente o usuario devera escrever uma descricao sobre si
-                String descricao = null;
+                String descricao = descricaoTxt.getText().toString();
+                float media = 0;
 
                 //trabalhando com a data de nascimento do usuario
                 String nascimentoStr = dataNascTxt.getText().toString();
@@ -221,7 +342,298 @@ public class Cadastro extends AppCompatActivity {
                 try {
                     Date diaNasc = formatador.parse(nascimentoStr);
 
-                    Usuario novoUsuario = new Usuario(nome, endereco, diaNasc, email, telefone, cpf, descricao, senha);
+                    Usuario novoUsuario = new Usuario(nome, endereco, diaNasc, email, telefone, cpf, descricao, senha, media);
+
+                    comparaExistenciaDados(novoUsuario);
+
+                } catch (ParseException ex) {
+                    System.err.println("Erro no formato da data...");
+                }
+
+            } else {
+                Toast toast = Toast.makeText(Cadastro.this, "As senhas não combinam", Toast.LENGTH_LONG);
+                toast.show();
+            }
+
+        }
+
+    }
+
+    private void comparaExistenciaDados(Usuario novo) {
+
+        RequestQueue pilha = Volley.newRequestQueue(this);
+        String url = GlobalVar.urlServidor + "usuario";
+
+        StringRequest requisicao = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject resposta = new JSONObject(response);
+
+                    if (resposta.getInt("cod") == 200) {
+
+                        if (operacao == 0) {
+                            //Cadastro de um novo usuário
+                            requestCadastroUsuario(novo);
+                        } else if (operacao == 1) {
+                            //Edição de um usuário já existente
+                            requestUpdateUsuario(novo);
+                        } else {
+                            Toast.makeText(Cadastro.this, "Erro na identificação da ação",
+                                    Toast.LENGTH_LONG).show();
+                        }
+
+                    } else {
+                        Toast.makeText(Cadastro.this, resposta.getString("informacao"),
+                                Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException ex) {
+                    Toast.makeText(Cadastro.this,
+                            "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.", Toast.LENGTH_LONG).show();
+                    ex.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Cadastro.this,
+                        "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> parametros = new HashMap<>();
+
+                parametros.put("servico", "compara");
+                parametros.put("id", GlobalVar.idUsuario + "");
+                parametros.put("nome", novo.getNome());
+                parametros.put("email", novo.getEmail());
+                parametros.put("telefone", novo.getTelefone());
+                parametros.put("cpf", novo.getCpf());
+
+                return parametros;
+            }
+        };
+        pilha.add(requisicao);
+    }
+
+    private void requestCadastroUsuario(Usuario novo) {
+
+        RequestQueue pilha = Volley.newRequestQueue(this);
+        String url = GlobalVar.urlServidor + "usuario";
+
+        StringRequest requisicao = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject resposta = new JSONObject(response);
+
+                    if (resposta.getInt("cod") == 200) {
+                        Toast.makeText(Cadastro.this, resposta.getString("informacao"),
+                                Toast.LENGTH_LONG).show();
+
+                        Intent trocaAct;
+
+                        if (usuarioCheck.isChecked()) {
+                            trocaAct = new Intent(Cadastro.this, SelecionarTrabalho.class);
+                            startActivity(trocaAct);
+                            finish();
+                        } else {
+                            trocaAct = new Intent(Cadastro.this, MainActivity.class);
+                            startActivity(trocaAct);
+                            finish();
+                        }
+
+                    } else {
+                        Toast.makeText(Cadastro.this, resposta.getString("informacao"),
+                                Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException ex) {
+                    Toast.makeText(Cadastro.this,
+                            "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Cadastro.this,
+                        "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> parametros = new HashMap<>();
+
+                parametros.put("servico", "cadastro");
+                parametros.put("nome", novo.getNome());
+                parametros.put("endereco", novo.getEndereco());
+                String pattern = "yyyy-MM-dd";
+                SimpleDateFormat formatador = new SimpleDateFormat(pattern);
+                parametros.put("dataNasc", formatador.format(novo.getDataNasc()));
+                parametros.put("mediaAvaliacao", novo.getMediaAvaliacao() + "");
+                parametros.put("email", novo.getEmail());
+                parametros.put("telefone", novo.getTelefone());
+                parametros.put("cpf", novo.getCpf());
+                parametros.put("descricao", novo.getDescricao());
+                parametros.put("senha", novo.getSenha());
+
+                return parametros;
+            }
+        };
+        pilha.add(requisicao);
+    }
+
+    private void requestUpdateUsuario(Usuario novo) {
+
+        RequestQueue pilha = Volley.newRequestQueue(this);
+        String url = GlobalVar.urlServidor + "usuario";
+
+        StringRequest requisicao = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject resposta = new JSONObject(response);
+
+                    if (resposta.getInt("cod") == 200) {
+                        Toast.makeText(Cadastro.this, resposta.getString("informacao"),
+                                Toast.LENGTH_LONG).show();
+
+                        GlobalVar.descricaoUsuarioLogin = novo.getDescricao();
+                        GlobalVar.nomeUsuarioLogin = novo.getNome();
+
+                        Intent trocaAct;
+
+                        if (usuarioCheck.isChecked()) {
+                            trocaAct = new Intent(Cadastro.this, SelecionarTrabalho.class);
+                            startActivity(trocaAct);
+                            finish();
+                        } else {
+                            trocaAct = new Intent(Cadastro.this, MenuControle.class);
+                            startActivity(trocaAct);
+                            finish();
+                        }
+
+                    } else {
+                        Toast.makeText(Cadastro.this, resposta.getString("informacao"),
+                                Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException ex) {
+                    Toast.makeText(Cadastro.this,
+                            "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Cadastro.this,
+                        "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> parametros = new HashMap<>();
+
+                parametros.put("servico", "atualiza");
+                parametros.put("id", GlobalVar.idUsuario + "");
+                parametros.put("nome", novo.getNome());
+                parametros.put("endereco", novo.getEndereco());
+                String pattern = "yyyy-MM-dd";
+                SimpleDateFormat formatador = new SimpleDateFormat(pattern);
+                parametros.put("dataNasc", formatador.format(novo.getDataNasc()));
+                parametros.put("email", novo.getEmail());
+                parametros.put("telefone", novo.getTelefone());
+                parametros.put("cpf", novo.getCpf());
+                parametros.put("descricao", novo.getDescricao());
+                parametros.put("senha", novo.getSenha());
+
+                return parametros;
+            }
+        };
+        pilha.add(requisicao);
+    }
+
+    private void exclusaoUsuario(){
+
+        RequestQueue pilha = Volley.newRequestQueue(this);
+        String url = GlobalVar.urlServidor + "usuario";
+
+        StringRequest requisicao = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject resposta = new JSONObject(response);
+
+                    if (resposta.getInt("cod") == 200) {
+                        Toast.makeText(Cadastro.this, resposta.getString("informacao"),
+                                Toast.LENGTH_LONG).show();
+
+                        GlobalVar.idUsuario = -1;
+                        Intent trocaAct = new Intent(Cadastro.this, MainActivity.class);;
+                        startActivity(trocaAct);
+                        finish();
+
+                    } else {
+                        Toast.makeText(Cadastro.this, resposta.getString("informacao"),
+                                Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException ex) {
+                    Toast.makeText(Cadastro.this,
+                            "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Cadastro.this,
+                        "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> parametros = new HashMap<>();
+
+                parametros.put("servico", "deleta");
+                parametros.put("id", GlobalVar.idUsuario + "");
+
+                return parametros;
+            }
+        };
+        pilha.add(requisicao);
+    }
+
+    /*private void cadastrarUsuario() {
+
+        if (idade < 18) {
+
+            dataUsuario = Calendar.getInstance();
+            Toast toast = Toast.makeText(Cadastro.this, "Selecione uma data de nascimento válida.", Toast.LENGTH_LONG);
+            toast.show();
+            mostraData();
+
+        } else {
+
+            String senha = senhaTxt.getText().toString();
+            String confirmaSenha = senhaConfirmTxt.getText().toString();
+            if (senha.equals(confirmaSenha)) {
+
+                String nome = nomeTxt.getText().toString();
+                String endereco = enderecoTxt.getText().toString();
+                String email = emailTxt.getText().toString();
+                String telefone = celularTxt.getText().toString();
+                String cpf = cpfTxt.getText().toString();
+                String descricao = descricaoTxt.getText().toString();
+                float media = 0;
+
+                //trabalhando com a data de nascimento do usuario
+                String nascimentoStr = dataNascTxt.getText().toString();
+                String pattern = "dd/MM/yyyy";
+                SimpleDateFormat formatador = new SimpleDateFormat(pattern);
+
+                try {
+                    Date diaNasc = formatador.parse(nascimentoStr);
+
+                    Usuario novoUsuario = new Usuario(nome, endereco, diaNasc, email, telefone, cpf, descricao, senha, media);
 
 
                     //confirma os dados do usuario
@@ -233,7 +645,15 @@ public class Cadastro extends AppCompatActivity {
                         db.insereUsuario(novoUsuario);
                         Toast.makeText(Cadastro.this, "Cadastro feito com sucesso.", Toast.LENGTH_LONG).show();
 
-                        finish();
+                        if(usuarioCheck.isChecked()){
+                            Intent trocaAct = new Intent(Cadastro.this, SelecionarTrabalho.class);
+
+                            startActivity(trocaAct);
+                            finish();
+
+                        }else{
+                            finish();
+                        }
 
                     } else if (confirma == 1) {
                         Toast.makeText(Cadastro.this, "Erro! Nome de usuário já registrado.", Toast.LENGTH_LONG).show();
@@ -256,6 +676,6 @@ public class Cadastro extends AppCompatActivity {
 
         }
 
-    }
+    }*/
 
 }

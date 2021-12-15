@@ -59,6 +59,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="phone"
+                        android:hint="Digite seu telefone"
                         android:textSize="20sp" />
 
                 </LinearLayout>
@@ -81,6 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
+                        android:hint="Digite sua senha"
                         android:textSize="20sp" />
 
                 </LinearLayout>

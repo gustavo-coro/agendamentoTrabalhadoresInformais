@@ -24,6 +24,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tituloCadTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -51,6 +52,7 @@
                     android:id="@+id/nomeCadastroTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Digite deu nome"
                     android:inputType="textCapWords|textAutoCorrect" />
 
                 <!--data de nascimento-->
@@ -83,6 +85,7 @@
                     android:id="@+id/cpfCadastroTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Digite seu C.P.F"
                     android:inputType="number" />
 
                 <!--endereco-->
@@ -98,6 +101,7 @@
                     android:id="@+id/enderecoCadastroTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Digite seu endereço"
                     android:inputType="textCapWords|textAutoCorrect" />
 
                 <!--email-->
@@ -113,6 +117,7 @@
                     android:id="@+id/emailCadastroTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Digite seu endereço de email"
                     android:inputType="textEmailAddress" />
 
                 <!--telefone-->
@@ -128,7 +133,24 @@
                     android:id="@+id/celularCadastroTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Digite seu telefone"
                     android:inputType="phone" />
+
+                <!--descricao-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Descrição:"
+                    android:textSize="17dp" />
+
+                <EditText
+                    android:id="@+id/descricaoCadastroTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Digite uma breve descrição sobre você"
+                    android:inputType="textCapSentences|textAutoCorrect|textMultiLine" />
 
                 <!--senha-->
                 <TextView
@@ -143,6 +165,7 @@
                     android:id="@+id/senhaCadastroTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Digite uma senha"
                     android:inputType="textPassword" />
 
                 <!--confirmacao de senha-->
@@ -158,6 +181,7 @@
                     android:id="@+id/senhaConfirmCadastroTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Confirme sua senha"
                     android:inputType="textPassword" />
 
                 <LinearLayout
