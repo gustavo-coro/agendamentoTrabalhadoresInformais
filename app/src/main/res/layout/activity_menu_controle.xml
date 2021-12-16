@@ -37,7 +37,6 @@
                 android:textAlignment="center"
                 android:textSize="18sp" />
 
-
             <!--LinearLayout que engloba as informaçoes de perfil do usuario-->
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -55,7 +54,10 @@
                     android:textAlignment="center"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#c0c0c0"/>
 
                 <TextView
                     android:id="@+id/descricaoUsuarioTxt"
@@ -65,6 +67,11 @@
                     android:text="Descrição"
                     android:textAlignment="center"
                     android:textSize="17sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#c0c0c0"/>
             </LinearLayout>
 
             <LinearLayout

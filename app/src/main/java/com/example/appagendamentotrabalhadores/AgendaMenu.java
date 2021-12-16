@@ -21,6 +21,8 @@ public class AgendaMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda_menu);
 
+        getSupportActionBar().hide();
+
         //Link entre os atributos java e os componentes XML
         agendarBtn = (Button) findViewById(R.id.agendarBtn);
         editAgendaBtn = (Button) findViewById(R.id.editarAgendaBtn);

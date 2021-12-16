@@ -24,6 +24,8 @@ public class MenuControle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_controle);
 
+        getSupportActionBar().hide();
+
         nomeTxt = (TextView) findViewById(R.id.nomeUsuarioTxt);
         descricaoTxt = (TextView) findViewById(R.id.descricaoUsuarioTxt);
         agendamentoBtn = (Button) findViewById(R.id.agendamentoBtn);

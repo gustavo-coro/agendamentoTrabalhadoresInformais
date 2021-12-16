@@ -20,6 +20,8 @@ public class SelecionarTrabalho extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selecionar_trabalho);
 
+        getSupportActionBar().hide();
+
         listaTrabalhosNview = (NavigationView) findViewById(R.id.trabalhosNView);
         confirmaBtn = (Button) findViewById(R.id.confirmaBtn);
         cancelaBtn = (Button) findViewById(R.id.cancelaBtn);

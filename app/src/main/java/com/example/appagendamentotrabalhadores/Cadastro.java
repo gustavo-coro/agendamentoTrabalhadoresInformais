@@ -71,6 +71,8 @@ public class Cadastro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
+        getSupportActionBar().hide();
+
         //Link entre os atributos java e os componentes XML
         tituloTxt = (TextView) findViewById(R.id.tituloCadTxt);
         nomeTxt = (TextInputLayout) findViewById(R.id.nomeCadastroTxt);

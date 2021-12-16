@@ -37,6 +37,8 @@ public class AgendamentoTrabalho extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendamento_trabalho);
 
+        getSupportActionBar().hide();
+
         trabalhadorTxt = (TextView) findViewById(R.id.nomeTrabalhadorTxt);
         tipoServicoSpnr = (Spinner) findViewById(R.id.selecionaServicoSpnr);
         dataTxt = (TextView) findViewById(R.id.dataTxt);

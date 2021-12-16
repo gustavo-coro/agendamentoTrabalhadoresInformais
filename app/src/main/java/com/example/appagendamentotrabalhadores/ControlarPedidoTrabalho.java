@@ -25,6 +25,8 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controlar_pedido_trabalho);
 
+        getSupportActionBar().hide();
+
         usuarioTxt = (TextView) findViewById(R.id.nomeUsuarioTxt);
         tipoServicoTxt = (TextView) findViewById(R.id.tipoServicoTxt);
         dataTxt = (TextView) findViewById(R.id.dataTxt);

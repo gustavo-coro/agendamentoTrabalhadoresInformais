@@ -20,6 +20,8 @@ public class TrabalhosConcluidos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabalhos_concluidos);
 
+        getSupportActionBar().hide();
+
         trabalhosNView = (NavigationView) findViewById(R.id.trabalhosNView);
         voltarBtn = (Button) findViewById(R.id.voltarBtn);
 

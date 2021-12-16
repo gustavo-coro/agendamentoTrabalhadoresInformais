@@ -22,6 +22,8 @@ public class EditAgenda extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_agenda);
 
+        getSupportActionBar().hide();
+
         listaAgendaList = (ListView) findViewById(R.id.listaAgendaList);
         cancelarTrabBtn = (Button) findViewById(R.id.cancelarTrabBtn);
 
