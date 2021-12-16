@@ -103,8 +103,12 @@ public class MenuControle extends AppCompatActivity {
 
                 Intent trocaAct = new Intent(MenuControle.this, MainActivity.class);
 
-                startActivity(trocaAct);
+                GlobalVar.nomeUsuarioLogin = "";
+                GlobalVar.descricaoUsuarioLogin = "";
+                GlobalVar.idUsuario = -1;
 
+                startActivity(trocaAct);
+                finish();
             }
         });
 

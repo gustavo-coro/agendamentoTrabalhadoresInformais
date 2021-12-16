@@ -37,9 +37,10 @@ public class SelecionarTrabalho extends AppCompatActivity {
             public void onClick(View view) {
                 Intent trocaAct;
                 //verifica se o usuário fez login
-                if(GlobalVar.idUsuario >= 0){
+                if(GlobalVar.idUsuario != -1){
                     trocaAct = new Intent(SelecionarTrabalho.this, MenuControle.class);
                     startActivity(trocaAct);
+                    finish();
                 }else{
                     trocaAct = new Intent(SelecionarTrabalho.this, MainActivity.class);
                     startActivity(trocaAct);
@@ -53,9 +54,10 @@ public class SelecionarTrabalho extends AppCompatActivity {
             public void onClick(View view) {
                 Intent trocaAct;
                 //verifica se o usuário fez login
-                if(GlobalVar.idUsuario >= 0){
+                if(GlobalVar.idUsuario != -1){
                     trocaAct = new Intent(SelecionarTrabalho.this, MenuControle.class);
                     startActivity(trocaAct);
+                    finish();
                 }else{
                     trocaAct = new Intent(SelecionarTrabalho.this, MainActivity.class);
                     startActivity(trocaAct);
