@@ -25,6 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,15 +49,15 @@ public class Cadastro extends AppCompatActivity {
     private int idade;
 
     private TextView tituloTxt;
-    private EditText nomeTxt;
+    private TextInputLayout nomeTxt;
     private TextView dataNascTxt;
-    private EditText cpfTxt;
-    private EditText enderecoTxt;
-    private EditText emailTxt;
-    private EditText celularTxt;
-    private EditText descricaoTxt;
-    private EditText senhaTxt;
-    private EditText senhaConfirmTxt;
+    private TextInputLayout cpfTxt;
+    private TextInputLayout enderecoTxt;
+    private TextInputLayout emailTxt;
+    private TextInputLayout celularTxt;
+    private TextInputLayout descricaoTxt;
+    private TextInputLayout senhaTxt;
+    private TextInputLayout senhaConfirmTxt;
     private CheckBox usuarioCheck;
     private Button cdtBtn;
     private Button voltaBtn;
@@ -72,15 +73,15 @@ public class Cadastro extends AppCompatActivity {
 
         //Link entre os atributos java e os componentes XML
         tituloTxt = (TextView) findViewById(R.id.tituloCadTxt);
-        nomeTxt = (EditText) findViewById(R.id.nomeCadastroTxt);
+        nomeTxt = (TextInputLayout) findViewById(R.id.nomeCadastroTxt);
         dataNascTxt = (TextView) findViewById(R.id.dataNascTxt);
-        cpfTxt = (EditText) findViewById(R.id.cpfCadastroTxt);
-        enderecoTxt = (EditText) findViewById(R.id.enderecoCadastroTxt);
-        emailTxt = (EditText) findViewById(R.id.emailCadastroTxt);
-        celularTxt = (EditText) findViewById(R.id.celularCadastroTxt);
-        descricaoTxt = (EditText) findViewById(R.id.descricaoCadastroTxt);
-        senhaTxt = (EditText) findViewById(R.id.senhaCadastroTxt);
-        senhaConfirmTxt = (EditText) findViewById(R.id.senhaConfirmCadastroTxt);
+        cpfTxt = (TextInputLayout) findViewById(R.id.cpfCadastroTxt);
+        enderecoTxt = (TextInputLayout) findViewById(R.id.enderecoCadastroTxt);
+        emailTxt = (TextInputLayout) findViewById(R.id.emailCadastroTxt);
+        celularTxt = (TextInputLayout) findViewById(R.id.celularCadastroTxt);
+        descricaoTxt = (TextInputLayout) findViewById(R.id.descricaoCadastroTxt);
+        senhaTxt = (TextInputLayout) findViewById(R.id.senhaCadastroTxt);
+        senhaConfirmTxt = (TextInputLayout) findViewById(R.id.senhaConfirmCadastroTxt);
         usuarioCheck = (CheckBox) findViewById(R.id.usuarioCheck);
         cdtBtn = (Button) findViewById(R.id.concluirCadastroBtn);
         voltaBtn = (Button) findViewById(R.id.voltarLoginBtn);
@@ -126,14 +127,14 @@ public class Cadastro extends AppCompatActivity {
                                         obj.getString("telefone"), obj.getString("cpf"),
                                         obj.getString("descricao"), obj.getString("senha"), 0);
 
-                                nomeTxt.setText(usuarioSelecionado.getNome());
-                                cpfTxt.setText(usuarioSelecionado.getCpf());
-                                enderecoTxt.setText(usuarioSelecionado.getEndereco());
-                                emailTxt.setText(usuarioSelecionado.getEmail());
-                                celularTxt.setText(usuarioSelecionado.getTelefone());
-                                descricaoTxt.setText(usuarioSelecionado.getDescricao());
-                                senhaTxt.setText(usuarioSelecionado.getSenha());
-                                senhaConfirmTxt.setText(usuarioSelecionado.getSenha());
+                                nomeTxt.getEditText().setText(usuarioSelecionado.getNome());
+                                cpfTxt.getEditText().setText(usuarioSelecionado.getCpf());
+                                enderecoTxt.getEditText().setText(usuarioSelecionado.getEndereco());
+                                emailTxt.getEditText().setText(usuarioSelecionado.getEmail());
+                                celularTxt.getEditText().setText(usuarioSelecionado.getTelefone());
+                                descricaoTxt.getEditText().setText(usuarioSelecionado.getDescricao());
+                                senhaTxt.getEditText().setText(usuarioSelecionado.getSenha());
+                                senhaConfirmTxt.getEditText().setText(usuarioSelecionado.getSenha());
 
                                 dataUsuario.setTime(usuarioSelecionado.getDataNasc());
                                 mostraData();
@@ -182,17 +183,17 @@ public class Cadastro extends AppCompatActivity {
     }
 
     //criando mascara para o telefone
-    private void mascaraTelefone(EditText tel) {
+    private void mascaraTelefone(TextInputLayout tel) {
         SimpleMaskFormatter smf = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
-        MaskTextWatcher mtw = new MaskTextWatcher(tel, smf);
-        tel.addTextChangedListener(mtw);
+        MaskTextWatcher mtw = new MaskTextWatcher(tel.getEditText(), smf);
+        tel.getEditText().addTextChangedListener(mtw);
     }
 
     //criando mascara para o cpf
-    private void mascaraCpf(EditText cpf) {
+    private void mascaraCpf(TextInputLayout cpf) {
         SimpleMaskFormatter smf = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
-        MaskTextWatcher mtw = new MaskTextWatcher(cpf, smf);
-        cpf.addTextChangedListener(mtw);
+        MaskTextWatcher mtw = new MaskTextWatcher(cpf.getEditText(), smf);
+        cpf.getEditText().addTextChangedListener(mtw);
     }
 
     //metodo usado para mostrar a data atual quando o usuario abre a tela
@@ -243,12 +244,8 @@ public class Cadastro extends AppCompatActivity {
         cdtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean confirma = confirmaPreenchimento();
-                if (confirma == true) {
+                if (confirmaPreenchimento() == true) {
                     cadastraEditaUsuario();
-                } else {
-                    Toast toast = Toast.makeText(Cadastro.this, "Um ou mais campos não foram preenchidos.", Toast.LENGTH_LONG);
-                    toast.show();
                 }
             }
         });
@@ -294,18 +291,59 @@ public class Cadastro extends AppCompatActivity {
     private boolean confirmaPreenchimento() {
         boolean conf = true;
 
-        if (nomeTxt.getText().toString().isEmpty()) {
+        if (nomeTxt.getEditText().getText().toString().isEmpty()) {
+            nomeTxt.setError("Campo não pode estar vazio");
             conf = false;
-        } else if (celularTxt.getText().toString().isEmpty()) {
+        } else {
+            nomeTxt.setError(null);
+        }
+        if (celularTxt.getEditText().getText().toString().isEmpty()) {
+            celularTxt.setError("Campo não pode estar vazio");
             conf = false;
-        } else if (senhaTxt.getText().toString().isEmpty()) {
+        } else if (celularTxt.getEditText().getText().toString().length() < 15) {
+            celularTxt.setError("Preencha o campo corretamente");
             conf = false;
-        } else if (cpfTxt.getText().toString().isEmpty()) {
+        } else {
+            celularTxt.setError(null);
+        }
+        if (senhaTxt.getEditText().getText().toString().isEmpty()) {
+            senhaTxt.setError("Campo não pode estar vazio");
             conf = false;
-        } else if (emailTxt.getText().toString().isEmpty()) {
+        } else {
+            senhaTxt.setError(null);
+        }
+        if (senhaConfirmTxt.getEditText().getText().toString().isEmpty()) {
+            senhaConfirmTxt.setError("Campo não pode estar vazio");
             conf = false;
-        } else if (enderecoTxt.getText().toString().isEmpty()) {
+        } else {
+            senhaConfirmTxt.setError(null);
+        }
+        if (descricaoTxt.getEditText().getText().toString().isEmpty()) {
+            descricaoTxt.setError("Campo não pode estar vazio");
             conf = false;
+        } else {
+            descricaoTxt.setError(null);
+        }
+        if (cpfTxt.getEditText().getText().toString().isEmpty()) {
+            cpfTxt.setError("Campo não pode estar vazio");
+            conf = false;
+        } else if (cpfTxt.getEditText().getText().toString().length() < 14) {
+            cpfTxt.setError("Preencha o campo corretamente");
+            conf = false;
+        } else {
+            cpfTxt.setError(null);
+        }
+        if (emailTxt.getEditText().getText().toString().isEmpty()) {
+            emailTxt.setError("Campo não pode estar vazio");
+            conf = false;
+        } else {
+            emailTxt.setError(null);
+        }
+        if (enderecoTxt.getEditText().getText().toString().isEmpty()) {
+            enderecoTxt.setError("Campo não pode estar vazio");
+            conf = false;
+        } else {
+            enderecoTxt.setError(null);
         }
 
         return conf;
@@ -322,16 +360,17 @@ public class Cadastro extends AppCompatActivity {
 
         } else {
 
-            String senha = senhaTxt.getText().toString();
-            String confirmaSenha = senhaConfirmTxt.getText().toString();
+            String senha = senhaTxt.getEditText().getText().toString();
+            String confirmaSenha = senhaConfirmTxt.getEditText().getText().toString();
             if (senha.equals(confirmaSenha)) {
+                senhaConfirmTxt.setError(null);
 
-                String nome = nomeTxt.getText().toString();
-                String endereco = enderecoTxt.getText().toString();
-                String email = emailTxt.getText().toString();
-                String telefone = celularTxt.getText().toString();
-                String cpf = cpfTxt.getText().toString();
-                String descricao = descricaoTxt.getText().toString();
+                String nome = nomeTxt.getEditText().getText().toString();
+                String endereco = enderecoTxt.getEditText().getText().toString();
+                String email = emailTxt.getEditText().getText().toString();
+                String telefone = celularTxt.getEditText().getText().toString();
+                String cpf = cpfTxt.getEditText().getText().toString();
+                String descricao = descricaoTxt.getEditText().getText().toString();
                 float media = 0;
 
                 //trabalhando com a data de nascimento do usuario
@@ -351,8 +390,7 @@ public class Cadastro extends AppCompatActivity {
                 }
 
             } else {
-                Toast toast = Toast.makeText(Cadastro.this, "As senhas não combinam", Toast.LENGTH_LONG);
-                toast.show();
+                senhaConfirmTxt.setError("As senhas não combinam");
             }
 
         }
@@ -553,7 +591,7 @@ public class Cadastro extends AppCompatActivity {
         pilha.add(requisicao);
     }
 
-    private void exclusaoUsuario(){
+    private void exclusaoUsuario() {
 
         RequestQueue pilha = Volley.newRequestQueue(this);
         String url = GlobalVar.urlServidor + "usuario";
@@ -569,7 +607,8 @@ public class Cadastro extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
                         GlobalVar.idUsuario = -1;
-                        Intent trocaAct = new Intent(Cadastro.this, MainActivity.class);;
+                        Intent trocaAct = new Intent(Cadastro.this, MainActivity.class);
+                        ;
                         startActivity(trocaAct);
                         finish();
 

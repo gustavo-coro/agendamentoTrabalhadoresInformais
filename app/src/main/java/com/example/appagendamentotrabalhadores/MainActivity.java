@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,8 +38,8 @@ import modelo.Usuario;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText telefoneTxt;
-    private EditText senhaTxt;
+    private TextInputLayout telefoneTxt;
+    private TextInputLayout senhaTxt;
     private Button entrarBtn;
     private Button cadastrarBtn;
     private Usuario usuarioLogin = null;
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        telefoneTxt = (EditText) findViewById(R.id.telefoneTxt);
-        senhaTxt = (EditText) findViewById(R.id.senhaTxt);
+        telefoneTxt = (TextInputLayout) findViewById(R.id.telefoneTxt);
+        senhaTxt = (TextInputLayout) findViewById(R.id.senhaTxt);
         entrarBtn = (Button) findViewById(R.id.entrarBtn);
         cadastrarBtn = (Button) findViewById(R.id.cadastrarBtn);
 
@@ -72,10 +73,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //criando mascara para o telefone
-    private void mascaraTelefone(EditText tel) {
+    private void mascaraTelefone(TextInputLayout tel) {
         SimpleMaskFormatter smf = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
-        MaskTextWatcher mtw = new MaskTextWatcher(tel, smf);
-        tel.addTextChangedListener(mtw);
+        MaskTextWatcher mtw = new MaskTextWatcher(tel.getEditText(), smf);
+        tel.getEditText().addTextChangedListener(mtw);
     }
 
     private void loginEvento() {
@@ -83,7 +84,11 @@ public class MainActivity extends AppCompatActivity {
         entrarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmaLogin(telefoneTxt.getText().toString(), senhaTxt.getText().toString());
+                if (validacao() == true) {
+                    confirmaLogin(telefoneTxt.getEditText().getText().toString(),
+                            senhaTxt.getEditText().getText().toString());
+                }
+
             }
         });
 
@@ -98,6 +103,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private boolean validacao() {
+        boolean valida = true;
+        if (telefoneTxt.getEditText().getText().toString().isEmpty()) {
+            telefoneTxt.setError("Campo não pode estar vazio");
+            valida = false;
+        } else if (telefoneTxt.getEditText().getText().toString().length() < 15) {
+            telefoneTxt.setError("Preencha o campo corretamente");
+            valida = false;
+        } else {
+            telefoneTxt.setError(null);
+        }
+        if (senhaTxt.getEditText().getText().toString().isEmpty()) {
+            senhaTxt.setError("Campo não pode estar vazio");
+            valida = false;
+        } else {
+            senhaTxt.setError(null);
+        }
+        return valida;
     }
 
     private void confirmaLogin(String tel, String senha) {

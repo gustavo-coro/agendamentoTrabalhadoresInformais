@@ -15,7 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,54 +42,65 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="110dp">
+                android:padding="25dp">
 
                 <!--Botão de Agendar-->
                 <Button
                     android:id="@+id/agendarBtn"
-                    android:layout_width="195dp"
+                    app:icon="@drawable/ic_baseline_add_24"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:text="AGENDAR NOVO"
-                    android:textSize="20dp">
+                    android:layout_weight="1"
+                    android:text="Agendar Novo"
+                    android:textSize="15dp">
 
                 </Button>
 
                 <!--Botão de editar a agenda-->
                 <Button
                     android:id="@+id/editarAgendaBtn"
-                    android:layout_width="195dp"
+                    app:icon="@drawable/ic_baseline_edit_24"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:text="EDITAR AGENDA"
-                    android:textSize="20dp">
+                    android:layout_weight="1"
+                    android:text="Editar Agenda"
+                    android:textSize="15dp">
 
                 </Button>
 
                 <!--Botão para ver trabalhos concluídos-->
                 <Button
                     android:id="@+id/trabalhosConcluidosBtn"
-                    android:layout_width="195dp"
+                    app:icon="@drawable/ic_baseline_check_24"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:text="TRABALHOS CONCLUÍDOS"
-                    android:textSize="20dp">
+                    android:layout_weight="1"
+                    android:text="Trabalhos Concluidos"
+                    android:textSize="15dp">
 
                 </Button>
 
                 <!--Botão de solicitações-->
                 <Button
                     android:id="@+id/solicitacoesBtn"
-                    android:layout_width="195dp"
-                    android:layout_height="70dp"
+                    app:icon="@drawable/ic_baseline_article_24"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
-                    android:text="SOLICITAÇÕES"
-                    android:textSize="20dp">
+                    android:layout_weight="1"
+                    android:text="Solicitações"
+                    android:textSize="15dp">
 
                 </Button>
 
