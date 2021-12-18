@@ -20,9 +20,12 @@
         <entry key="..\:/Users/55319/OneDrive/Desktop/dever/top_ des_ software/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_edit_agenda.xml" value="0.25" />
         <entry key="..\:/Users/55319/OneDrive/Desktop/dever/top_ des_ software/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_menu_controle.xml" value="0.22" />
         <entry key="..\:/Users/55319/OneDrive/Desktop/dever/top_ des_ software/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_trabalhos_concluidos.xml" value="0.25" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/drawable/apenas_borda.xml" value="0.18611111111111112" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/drawable/borda_lista.xml" value="0.18611111111111112" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.19537037037037036" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_agenda_menu.xml" value="0.25" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_agendamento_trabalho.xml" value="0.22" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_cadastrar_servico.xml" value="0.21" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_cadastro.xml" value="0.22" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_controlar_pedido_trabalho.xml" value="0.22" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_edit_agenda.xml" value="0.22" />
@@ -31,6 +34,7 @@
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_menu_controle.xml" value="0.22" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_selecionar_trabalho.xml" value="0.2" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_trabalhos_concluidos.xml" value="0.2" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/item_lista_tipos_servicos.xml" value="0.25" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/xml/network_security_config.xml" value="0.2" />
       </map>
     </option>

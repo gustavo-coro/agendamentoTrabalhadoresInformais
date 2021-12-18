@@ -54,10 +54,8 @@
                     android:textAlignment="center"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#c0c0c0"/>
+
+
 
                 <TextView
                     android:id="@+id/descricaoUsuarioTxt"
@@ -66,12 +64,11 @@
                     android:layout_gravity="center"
                     android:text="Descrição"
                     android:textAlignment="center"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:background="@drawable/apenas_borda"
+                    android:padding="5dp"/>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#c0c0c0"/>
+
             </LinearLayout>
 
             <LinearLayout

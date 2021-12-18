@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -13,7 +14,7 @@ import com.google.android.material.navigation.NavigationView;
 public class TrabalhosConcluidos extends AppCompatActivity {
 
     private Button voltarBtn;
-    private NavigationView trabalhosNView;
+    private ListView trabalhosList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class TrabalhosConcluidos extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        trabalhosNView = (NavigationView) findViewById(R.id.trabalhosNView);
+        trabalhosList = (ListView) findViewById(R.id.trabalhosList);
         voltarBtn = (Button) findViewById(R.id.voltarBtn);
 
         //responsavel por chamar todos os eventos dos botoes

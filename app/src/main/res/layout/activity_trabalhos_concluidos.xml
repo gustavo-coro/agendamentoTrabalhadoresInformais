@@ -26,10 +26,12 @@
                 android:textAlignment="center"
                 android:textSize="35dp"></TextView>
 
-            <com.google.android.material.navigation.NavigationView
-                android:id="@+id/trabalhosNView"
+            <ListView
+                android:id="@+id/trabalhosList"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1" />
 
             <!--Botão cancelar trabalho-->
             <Button
