@@ -56,17 +56,16 @@
                     android:textStyle="bold" />
 
 
-
                 <TextView
                     android:id="@+id/descricaoUsuarioTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:background="@drawable/apenas_borda"
+                    android:padding="5dp"
                     android:text="Descrição"
                     android:textAlignment="center"
-                    android:textSize="17sp"
-                    android:background="@drawable/apenas_borda"
-                    android:padding="5dp"/>
+                    android:textSize="17sp" />
 
 
             </LinearLayout>
@@ -89,59 +88,68 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp">
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
 
                     <Button
                         android:id="@+id/agendamentoBtn"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginBottom="15dp"
-                        android:text="Agendamento"
-                        android:textSize="20sp" />
+                        android:text="Agendar Serviço"
+                        android:textSize="18sp"
+                        app:icon="@drawable/ic_baseline_add_24"
+                        app:iconPadding="0dp" />
 
                     <Button
-                        android:id="@+id/agendaMenuBtn"
+                        android:id="@+id/pedidosBtn"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginBottom="15dp"
-                        android:text="Agenda"
-                        android:textSize="20sp">
-
-                    </Button>
+                        android:text="Solicitações"
+                        android:textSize="18sp"
+                        app:icon="@drawable/ic_baseline_article_24"
+                        app:iconPadding="0dp" />
 
                     <Button
                         android:id="@+id/editarAgendaMenuBtn"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginBottom="15dp"
                         android:text="Editar Agenda"
-                        android:textSize="20sp">
-
-                    </Button>
+                        android:textSize="18sp"
+                        app:icon="@drawable/ic_baseline_edit_24"
+                        app:iconPadding="0dp" />
 
                     <Button
-                        android:id="@+id/pedidosBtn"
+                        android:id="@+id/trabalhosConcluidosBtn"
+                        style="@style/Widget.MaterialComponents.Button.Icon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginBottom="15dp"
-                        android:text="Pedidos de Trabalho"
-                        android:textSize="20sp" />
+                        android:text="Serviços Concluídos"
+                        android:textSize="18sp"
+                        app:icon="@drawable/ic_baseline_check_24"
+                        app:iconPadding="0dp" />
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/logoutBtn"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Sair"
-                    android:textSize="20sp" />
+                    android:textSize="18sp"
+                    app:icon="@drawable/ic_baseline_logout_24" />
 
             </LinearLayout>
         </LinearLayout>

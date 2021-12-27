@@ -120,7 +120,8 @@ public class SelecionarTrabalho extends AppCompatActivity {
                         listaTrabalhosList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent novoFluxo = new Intent(SelecionarTrabalho.this, CadastrarServico.class);
+                                Intent novoFluxo = new Intent(SelecionarTrabalho.this,
+                                        SelecionarServico.class);
                                 novoFluxo.putExtra("acao", 0);
                                 novoFluxo.putExtra("id", tiposServicos.get(position).getId());
                                 novoFluxo.putExtra("nome", tiposServicos.get(position).getNomeTipoServico());

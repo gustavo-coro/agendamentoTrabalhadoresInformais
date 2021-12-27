@@ -1,93 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="@drawable/apenas_borda"
-        android:padding="5dp">
+        android:orientation="vertical"
+        android:padding="7dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:textAlignment="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Trabalhador: "
-                android:textStyle="bold"
+                android:text="Usuário: "
+                android:textColor="@color/white"
                 android:textSize="18dp"
-                android:textColor="@color/white"/>
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/nomeUsuarioListaTxt"
+                android:id="@+id/nomeUsuarioTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Usuário"
-                android:textSize="18dp"
-                android:textColor="@color/white"/>
-    </LinearLayout>
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:textAlignment="center"
-            android:gravity="center">
+            android:textAlignment="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Serviço: "
-                android:textStyle="bold"
+                android:textColor="@color/white"
                 android:textSize="18dp"
-                android:textColor="@color/white"/>
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/servicoListaTxt"
+                android:id="@+id/nomeServicoTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Serviço"
-                android:textSize="18dp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:textAlignment="center"
-            android:gravity="center">
+            android:textAlignment="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Preço: R$"
-                android:textStyle="bold"
+                android:text="Data: "
+                android:textColor="@color/white"
                 android:textSize="18dp"
-                android:textColor="@color/white"/>
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/precoServicoListaTxt"
+                android:id="@+id/dataServicoTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="000.00"
+                android:layout_marginRight="10dp"
+                android:text="01/01/1970"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Hora: "
+                android:textColor="@color/white"
                 android:textSize="18dp"
-                android:textColor="@color/white"/>
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/horaServicoTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="00:00"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
         </LinearLayout>
-
-</LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

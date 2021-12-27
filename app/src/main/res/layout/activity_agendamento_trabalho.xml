@@ -42,14 +42,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:text="Trabalhador:"
-                    android:textSize="24sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/nomeTrabalhadorTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nome"
-                    android:textSize="24sp" />
+                    android:text="Nome do Trabalhador"
+                    android:textSize="22sp" />
 
             </LinearLayout>
 
@@ -70,13 +70,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:text="Tipo de Serviço: "
-                        android:textSize="24sp" />
+                        android:text="Serviço: "
+                        android:textSize="20sp" />
 
-                    <Spinner
-                        android:id="@+id/selecionaServicoSpnr"
-                        android:layout_width="70dp"
-                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/nomeServicoTxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nome do serviço"
+                        android:textSize="22sp" />
 
                 </LinearLayout>
 
@@ -90,13 +92,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:text="Endereço: "
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/enderecoTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPostalAddress" />
+                        android:inputType="textPostalAddress|textMultiLine|textCapSentences|textAutoCorrect"
+                        android:textSize="22sp" />
 
                 </LinearLayout>
 
@@ -110,14 +113,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:text="Data:"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/dataTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="01/01/1970"
-                        android:textSize="24sp" />
+                        android:textSize="22sp" />
 
                 </LinearLayout>
 
@@ -131,14 +134,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:text="Hora de Início:"
-                        android:textSize="24sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/horaInicioTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="00:00"
-                        android:textSize="24sp" />
+                        android:textSize="22sp" />
 
                 </LinearLayout>
             </LinearLayout>

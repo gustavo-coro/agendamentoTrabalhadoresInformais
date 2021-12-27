@@ -139,18 +139,19 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject obj = resposta.getJSONObject("informacao");
 
                         GlobalVar.idUsuario = obj.getInt("id");
-                        GlobalVar.descricaoUsuarioLogin = obj.getString("descricao");
-                        GlobalVar.nomeUsuarioLogin = obj.getString("nome");
+                        Usuario usuarioLogin = new Usuario(obj.getInt("id"), obj.getString("nome"),
+                                obj.getString("endereco"), new Date(obj.getLong("dataNasc")), obj.getString("email"),
+                                obj.getString("telefone"), obj.getString("cpf"),
+                                obj.getString("descricao"), obj.getString("senha"),
+                                (float) obj.getDouble("mediaAvaliacao"));
+                        GlobalVar.usuarioLogin = usuarioLogin;
 
                         if (GlobalVar.idUsuario < 0) {
 
                             Toast.makeText(MainActivity.this, "Telefone ou senha incorretos.", Toast.LENGTH_LONG).show();
 
                         } else {
-                            Intent trocaAct = new Intent(MainActivity.this, MenuControle.class);
-
-                            startActivity(trocaAct);
-                            finish();
+                            confirmaIsTrabalhador();
                         }
 
                     } else {
@@ -183,17 +184,57 @@ public class MainActivity extends AppCompatActivity {
         pilha.add(jsonRequest);
     }
 
-    /*private void confirmaLogin() {
+    private void confirmaIsTrabalhador() {
+        RequestQueue pilha = Volley.newRequestQueue(this);
+        String url = GlobalVar.urlServidor + "trabalhadorofereceservicos";
 
-        usuarioLogin = new ArrayList<>();
+        StringRequest jsonRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject resposta = new JSONObject(response);
 
-        String telefone = telefoneTxt.getText().toString();
-        String senha = senhaTxt.getText().toString();
+                    if (resposta.getInt("cod") == 200) {
+                        GlobalVar.usuarioIsTrabalhador = 1;
 
-        UsuarioDb db = new UsuarioDb(MainActivity.this);
-        usuarioLogin = db.buscaUsuarioLogin(telefone, senha);
+                        Intent trocaAct = new Intent(MainActivity.this, MenuControle.class);
 
+                        startActivity(trocaAct);
+                        finish();
 
-    }*/
+                    } else if(resposta.getInt("cod") == 204) {
+                        GlobalVar.usuarioIsTrabalhador = 0;
 
+                        Intent trocaAct = new Intent(MainActivity.this, MenuControle.class);
+
+                        startActivity(trocaAct);
+                        finish();
+                    } else {
+                        Toast.makeText(MainActivity.this,
+                                resposta.getString("informacao"), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException ex) {
+                    Toast.makeText(MainActivity.this,
+                            "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this,
+                        "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> parametros = new HashMap<>();
+
+                parametros.put("servico", "consultausuario");
+                parametros.put("idUsuario", GlobalVar.idUsuario + "");
+
+                return parametros;
+            }
+        };
+        pilha.add(jsonRequest);
+    }
 }

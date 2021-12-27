@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppAgendamentoTrabalhadores">
         <activity
+            android:name=".ListarSolicitacoesTrabalho"
+            android:exported="true" />
+        <activity
+            android:name=".ListarServico"
+            android:exported="true" />
+        <activity
+            android:name=".SelecionarServico"
+            android:exported="true" />
+        <activity
             android:name=".CadastrarServico"
             android:exported="true" />
         <activity
@@ -23,9 +32,6 @@
             android:exported="true" />
         <activity
             android:name=".TrabalhosConcluidos"
-            android:exported="true" />
-        <activity
-            android:name=".AgendaMenu"
             android:exported="true" />
         <activity
             android:name=".Cadastro"

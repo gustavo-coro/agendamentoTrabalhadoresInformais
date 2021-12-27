@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +9,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ListarTrabalhadores">
+        tools:context=".SelecionarServico">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,38 +20,49 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:text="Lista de Trabalhadores"
+                android:layout_marginBottom="10dp"
+                android:text="Selecionar Serviço"
                 android:textAlignment="center"
-                android:textSize="35sp" />
+                android:textSize="35dp"></TextView>
 
             <ListView
-                android:id="@+id/listaTrabalhadoresList"
+                android:id="@+id/selectServicoList"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginBottom="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/borda_lista"
                 android:nestedScrollingEnabled="true"
-                android:scrollbars="vertical" />
-
+                android:padding="5dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="horizontal">
 
+                <!--Botão confrima seleção de serviço-->
+                <Button
+                    android:id="@+id/confirmaBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="Confirmar"
+                    android:textSize="20dp"></Button>
+
+                <!--Botão cancela seleção de serviço-->
                 <Button
                     android:id="@+id/cancelaBtn"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Cancelar"
-                    android:textSize="18sp" />
+                    android:text="Voltar"
+                    android:textSize="20dp"></Button>
 
             </LinearLayout>
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

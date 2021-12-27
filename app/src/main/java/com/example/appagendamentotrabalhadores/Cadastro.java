@@ -51,6 +51,7 @@ public class Cadastro extends AppCompatActivity {
     private TextView tituloTxt;
     private TextInputLayout nomeTxt;
     private TextView dataNascTxt;
+    private TextView opcaoTrabalhadorTxt;
     private TextInputLayout cpfTxt;
     private TextInputLayout enderecoTxt;
     private TextInputLayout emailTxt;
@@ -77,6 +78,7 @@ public class Cadastro extends AppCompatActivity {
         tituloTxt = (TextView) findViewById(R.id.tituloCadTxt);
         nomeTxt = (TextInputLayout) findViewById(R.id.nomeCadastroTxt);
         dataNascTxt = (TextView) findViewById(R.id.dataNascTxt);
+        opcaoTrabalhadorTxt = (TextView) findViewById(R.id.opcaoTrabalhadorTxt);
         cpfTxt = (TextInputLayout) findViewById(R.id.cpfCadastroTxt);
         enderecoTxt = (TextInputLayout) findViewById(R.id.enderecoCadastroTxt);
         emailTxt = (TextInputLayout) findViewById(R.id.emailCadastroTxt);
@@ -108,10 +110,29 @@ public class Cadastro extends AppCompatActivity {
     private void ajustaOperacao() {
         if (operacao == 0) {
             mostraData();
+            nomeTxt.setEndIconVisible(false);
+            cpfTxt.setEndIconVisible(false);
+            enderecoTxt.setEndIconVisible(false);
+            emailTxt.setEndIconVisible(false);
+            celularTxt.setEndIconVisible(false);
+            descricaoTxt.setEndIconVisible(false);
         } else if (operacao == 1) {
+            //Mudando a visibilidade do icone, mostrando ao usuário que ele pode editar as informações
+            nomeTxt.setEndIconVisible(true);
+            cpfTxt.setEndIconVisible(true);
+            enderecoTxt.setEndIconVisible(true);
+            emailTxt.setEndIconVisible(true);
+            celularTxt.setEndIconVisible(true);
+            descricaoTxt.setEndIconVisible(true);
+
             tituloTxt.setText("Editar");
             cdtBtn.setText("Atualizar");
             voltaBtn.setText("Excluir");
+            if(GlobalVar.usuarioIsTrabalhador == 1) {
+                opcaoTrabalhadorTxt.setText("Quer começar a oferecer um novo trabalho?");
+            } else {
+                opcaoTrabalhadorTxt.setText("Quer começar a oferecer algum trabalho?");
+            }
 
             if (GlobalVar.idUsuario != -1) {
                 RequestQueue pilha = Volley.newRequestQueue(this);
@@ -373,7 +394,7 @@ public class Cadastro extends AppCompatActivity {
                 String telefone = celularTxt.getEditText().getText().toString();
                 String cpf = cpfTxt.getEditText().getText().toString();
                 String descricao = descricaoTxt.getEditText().getText().toString();
-                float media = 0;
+                float media = GlobalVar.usuarioLogin.getMediaAvaliacao();
 
                 //trabalhando com a data de nascimento do usuario
                 String nascimentoStr = dataNascTxt.getText().toString();
@@ -539,8 +560,8 @@ public class Cadastro extends AppCompatActivity {
                         Toast.makeText(Cadastro.this, resposta.getString("informacao"),
                                 Toast.LENGTH_LONG).show();
 
-                        GlobalVar.descricaoUsuarioLogin = novo.getDescricao();
-                        GlobalVar.nomeUsuarioLogin = novo.getNome();
+                        GlobalVar.usuarioLogin = novo;
+                        GlobalVar.usuarioLogin.setId(GlobalVar.idUsuario);
 
                         Intent trocaAct;
 
@@ -642,81 +663,4 @@ public class Cadastro extends AppCompatActivity {
         };
         pilha.add(requisicao);
     }
-
-    /*private void cadastrarUsuario() {
-
-        if (idade < 18) {
-
-            dataUsuario = Calendar.getInstance();
-            Toast toast = Toast.makeText(Cadastro.this, "Selecione uma data de nascimento válida.", Toast.LENGTH_LONG);
-            toast.show();
-            mostraData();
-
-        } else {
-
-            String senha = senhaTxt.getText().toString();
-            String confirmaSenha = senhaConfirmTxt.getText().toString();
-            if (senha.equals(confirmaSenha)) {
-
-                String nome = nomeTxt.getText().toString();
-                String endereco = enderecoTxt.getText().toString();
-                String email = emailTxt.getText().toString();
-                String telefone = celularTxt.getText().toString();
-                String cpf = cpfTxt.getText().toString();
-                String descricao = descricaoTxt.getText().toString();
-                float media = 0;
-
-                //trabalhando com a data de nascimento do usuario
-                String nascimentoStr = dataNascTxt.getText().toString();
-                String pattern = "dd/MM/yyyy";
-                SimpleDateFormat formatador = new SimpleDateFormat(pattern);
-
-                try {
-                    Date diaNasc = formatador.parse(nascimentoStr);
-
-                    Usuario novoUsuario = new Usuario(nome, endereco, diaNasc, email, telefone, cpf, descricao, senha, media);
-
-
-                    //confirma os dados do usuario
-                    UsuarioDb db = new UsuarioDb(Cadastro.this);
-                    int confirma = db.buscaUsuarioCadastro(novoUsuario);
-
-                    if (confirma == 0) {
-                        //cadastra usuario no bd
-                        db.insereUsuario(novoUsuario);
-                        Toast.makeText(Cadastro.this, "Cadastro feito com sucesso.", Toast.LENGTH_LONG).show();
-
-                        if(usuarioCheck.isChecked()){
-                            Intent trocaAct = new Intent(Cadastro.this, SelecionarTrabalho.class);
-
-                            startActivity(trocaAct);
-                            finish();
-
-                        }else{
-                            finish();
-                        }
-
-                    } else if (confirma == 1) {
-                        Toast.makeText(Cadastro.this, "Erro! Nome de usuário já registrado.", Toast.LENGTH_LONG).show();
-                    } else if (confirma == 2) {
-                        Toast.makeText(Cadastro.this, "Erro! CPF já registrado.", Toast.LENGTH_LONG).show();
-                    } else if (confirma == 3) {
-                        Toast.makeText(Cadastro.this, "Erro! Email já registrado.", Toast.LENGTH_LONG).show();
-                    } else if (confirma == 4) {
-                        Toast.makeText(Cadastro.this, "Erro! Telefone já registrado.", Toast.LENGTH_LONG).show();
-                    }
-
-                } catch (ParseException ex) {
-                    System.err.println("erro no formato da data...");
-                }
-
-            } else {
-                Toast toast = Toast.makeText(Cadastro.this, "As senhas não combinam.", Toast.LENGTH_LONG);
-                toast.show();
-            }
-
-        }
-
-    }*/
-
 }

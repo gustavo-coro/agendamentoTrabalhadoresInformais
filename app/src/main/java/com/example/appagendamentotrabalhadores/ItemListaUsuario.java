@@ -9,20 +9,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import modelo.Usuario;
-
-public class ItemListaUsuario extends ArrayAdapter<Usuario> {
+public class ItemListaUsuario extends ArrayAdapter<String[]> {
 
     private Context contextoPai;
-    ArrayList<Usuario> usuario;
+    ArrayList<String[]> usuario;
 
     private static class ViewHolder {
         private TextView nomeUsuario;
-        private TextView telefoneUsuario;
-        private TextView emailUsuario;
+        private TextView servicoLista;
+        private TextView precoServico;
     }
 
-    public ItemListaUsuario(Context contexto, ArrayList<Usuario> dados) {
+    public ItemListaUsuario(Context contexto, ArrayList<String[]> dados) {
         super(contexto, R.layout.item_lista_usuarios, dados);
 
         this.contextoPai = contexto;
@@ -30,7 +28,7 @@ public class ItemListaUsuario extends ArrayAdapter<Usuario> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        Usuario usuarioAtual = usuario.get(position);
+        String[] usuarioAtual = usuario.get(position);
         ItemListaUsuario.ViewHolder novaView;
         final View resultado;
 
@@ -41,8 +39,8 @@ public class ItemListaUsuario extends ArrayAdapter<Usuario> {
             convertView = inflater.inflate(R.layout.item_lista_usuarios, parent, false);
 
             novaView.nomeUsuario = (TextView) convertView.findViewById(R.id.nomeUsuarioListaTxt);
-            novaView.telefoneUsuario = (TextView) convertView.findViewById(R.id.telefoneUsuarioListaTxt);
-            novaView.emailUsuario = (TextView) convertView.findViewById(R.id.emailUsuarioListaTxt);
+            novaView.servicoLista = (TextView) convertView.findViewById(R.id.servicoListaTxt);
+            novaView.precoServico = (TextView) convertView.findViewById(R.id.precoServicoListaTxt);
 
             resultado = convertView;
             convertView.setTag(novaView);
@@ -52,9 +50,9 @@ public class ItemListaUsuario extends ArrayAdapter<Usuario> {
             resultado = convertView;
         }
         //setando os valores
-        novaView.nomeUsuario.setText(usuarioAtual.getNome());
-        novaView.telefoneUsuario.setText(usuarioAtual.getTelefone());
-        novaView.emailUsuario.setText(usuarioAtual.getEmail());
+        novaView.nomeUsuario.setText(usuarioAtual[0]);
+        novaView.servicoLista.setText(usuarioAtual[2]);
+        novaView.precoServico.setText(usuarioAtual[3]);
 
         return resultado;
     }

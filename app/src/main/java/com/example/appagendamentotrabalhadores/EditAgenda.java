@@ -37,7 +37,7 @@ public class EditAgenda extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent trocaAct = new Intent(EditAgenda.this, AgendaMenu.class);
+                Intent trocaAct = new Intent(EditAgenda.this, MenuControle.class);
 
                 startActivity(trocaAct);
             }

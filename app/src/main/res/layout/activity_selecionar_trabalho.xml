@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Selecionar Trabalhos"
+                android:text="Selecionar Tipo de Serviço"
                 android:textAlignment="center"
                 android:textSize="35dp"></TextView>
 
@@ -42,7 +42,7 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
-                <!--Botão confrima seleção de trabalhos-->
+                <!--Botão confrima seleção de tipo de serviço-->
                 <Button
                     android:id="@+id/confirmaBtn"
                     android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                     android:text="Confirmar"
                     android:textSize="20dp"></Button>
 
-                <!--Botão cancela seleção de trabalhos-->
+                <!--Botão cancela seleção de tipo de serviço-->
                 <Button
                     android:id="@+id/cancelaBtn"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"

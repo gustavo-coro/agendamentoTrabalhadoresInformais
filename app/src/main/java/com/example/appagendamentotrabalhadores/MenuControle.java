@@ -16,7 +16,7 @@ public class MenuControle extends AppCompatActivity {
     private Button pedidosBtn;
     private Button logoutBtn;
     private Button editarABtn;
-    private Button agendaMenuBtn;
+    private Button trabalhosConcluidosBtn;
 
 
     @Override
@@ -32,7 +32,7 @@ public class MenuControle extends AppCompatActivity {
         pedidosBtn = (Button) findViewById(R.id.pedidosBtn);
         logoutBtn = (Button) findViewById(R.id.logoutBtn);
         editarABtn = (Button) findViewById(R.id.editarAgendaMenuBtn);
-        agendaMenuBtn = (Button) findViewById(R.id.agendaMenuBtn);
+        trabalhosConcluidosBtn = (Button) findViewById(R.id.trabalhosConcluidosBtn);
 
 
         //responsavel por chamar todos os eventos dos botoes
@@ -43,8 +43,8 @@ public class MenuControle extends AppCompatActivity {
 
     private void menuEvento() {
 
-        nomeTxt.setText(GlobalVar.nomeUsuarioLogin);
-        descricaoTxt.setText(GlobalVar.descricaoUsuarioLogin);
+        nomeTxt.setText(GlobalVar.usuarioLogin.getNome());
+        descricaoTxt.setText(GlobalVar.usuarioLogin.getDescricao());
 
         nomeTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +59,7 @@ public class MenuControle extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent trocaAct = new Intent(MenuControle.this, ListarTrabalhadores.class);
+                Intent trocaAct = new Intent(MenuControle.this, ListarServico.class);
                 startActivity(trocaAct);
 
             }
@@ -69,7 +69,7 @@ public class MenuControle extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent trocaAct = new Intent(MenuControle.this, ControlarPedidoTrabalho.class);
+                Intent trocaAct = new Intent(MenuControle.this, ListarSolicitacoesTrabalho.class);
                 startActivity(trocaAct);
 
             }
@@ -86,11 +86,11 @@ public class MenuControle extends AppCompatActivity {
             }
         });
 
-        agendaMenuBtn.setOnClickListener(new View.OnClickListener() {
+        trabalhosConcluidosBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent trocaAct = new Intent(MenuControle.this, AgendaMenu.class);
+                Intent trocaAct = new Intent(MenuControle.this, TrabalhosConcluidos.class);
 
                 startActivity(trocaAct);
 
@@ -103,8 +103,7 @@ public class MenuControle extends AppCompatActivity {
 
                 Intent trocaAct = new Intent(MenuControle.this, MainActivity.class);
 
-                GlobalVar.nomeUsuarioLogin = "";
-                GlobalVar.descricaoUsuarioLogin = "";
+                GlobalVar.usuarioLogin = null;
                 GlobalVar.idUsuario = -1;
 
                 startActivity(trocaAct);

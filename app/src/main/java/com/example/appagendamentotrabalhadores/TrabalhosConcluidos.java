@@ -36,7 +36,7 @@ public class TrabalhosConcluidos extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent trocaAct = new Intent(TrabalhosConcluidos.this, AgendaMenu.class);
+                Intent trocaAct = new Intent(TrabalhosConcluidos.this, MenuControle.class);
 
                 startActivity(trocaAct);
             }

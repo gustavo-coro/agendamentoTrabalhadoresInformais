@@ -47,4 +47,9 @@ public class TiposServicos {
     public void setNomeTipoServico(String nomeTipoServico) {
         this.nomeTipoServico = nomeTipoServico;
     }
+
+    @Override
+    public String toString() {
+        return nomeTipoServico;
+    }
 }

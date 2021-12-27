@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ListarTrabalhadores">
+        tools:context=".ListarServico">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,19 +23,55 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:text="Lista de Trabalhadores"
+                android:text="Lista de Serviços"
                 android:textAlignment="center"
-                android:textSize="35sp" />
+                android:textSize="30sp" />
+
+
+            <!--Spinner que seleciona o filtro da pesquisa-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:text="Tipos de Trabalho:"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/trabalhoSpnr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1">
 
             <ListView
-                android:id="@+id/listaTrabalhadoresList"
+                android:id="@+id/listaServicosList"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginBottom="15dp"
+                android:layout_height="450dp"
                 android:layout_weight="1"
                 android:background="@drawable/borda_lista"
                 android:nestedScrollingEnabled="true"
                 android:scrollbars="vertical" />
+
+            <TextView
+                android:id="@+id/listaVaziaTxt"
+                android:text="Nenhum resultado disponível"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center" />
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -54,5 +90,6 @@
 
             </LinearLayout>
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
