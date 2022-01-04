@@ -23,24 +23,27 @@
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/drawable/apenas_borda.xml" value="0.18611111111111112" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/drawable/borda_lista.xml" value="0.18611111111111112" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.19537037037037036" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/drawable/linha_inferior.xml" value="0.17" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_agenda_menu.xml" value="0.25" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_agendamento_trabalho.xml" value="0.22" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_agendamento_trabalho.xml" value="0.18" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_cadastrar_servico.xml" value="0.21" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_cadastro.xml" value="0.22" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_controlar_pedido_trabalho.xml" value="0.22" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_cadastro.xml" value="0.18" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_controlar_pedido_trabalho.xml" value="0.18" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_edit_agenda.xml" value="0.22" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_listar_servico.xml" value="0.16983695652173914" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_listar_solicitacoes_trabalho.xml" value="0.1766304347826087" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_listar_trabalhadores.xml" value="0.22" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_listar_trabalhadores.xml" value="0.18" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_listar_trabalhos_aceitos.xml" value="0.15" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_menu_controle.xml" value="0.22" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_menu_controle.xml" value="0.18" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_selecionar_servico.xml" value="0.1838768115942029" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_selecionar_trabalho.xml" value="0.2" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_selecionar_trabalho.xml" value="0.16" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_trabalhos_aceitos.xml" value="0.16" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/activity_trabalhos_concluidos.xml" value="0.2" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/item_lista_servicos.xml" value="0.1838768115942029" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/item_lista_solicitacoes.xml" value="0.1721014492753623" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/item_lista_tipos_servicos.xml" value="0.25" />
-        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/item_lista_usuarios.xml" value="0.192481884057971" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/item_lista_servicos.xml" value="0.17" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/item_lista_solicitacoes.xml" value="0.13" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/item_lista_tipos_servicos.xml" value="0.18" />
+        <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/layout/item_lista_usuarios.xml" value="0.17" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2128205128205128" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2128205128205128" />
         <entry key="..\:/Users/55319/OneDrive/Projetos_Android/AppAgendamentoTrabalhadores/app/src/main/res/xml/network_security_config.xml" value="0.2" />

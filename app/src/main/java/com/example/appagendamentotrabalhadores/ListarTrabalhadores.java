@@ -114,10 +114,12 @@ public class ListarTrabalhadores extends AppCompatActivity {
                         listaTrabalhadoresList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent trocaAct = new Intent(ListarTrabalhadores.this, AgendamentoTrabalho.class);
+                                Intent trocaAct = new Intent(ListarTrabalhadores.this,
+                                        AgendamentoTrabalho.class);
 
                                 String extra[] = resultadoLista.get(position);
                                 try {
+                                    trocaAct.putExtra("acao", "0");
                                     trocaAct.putExtra("idTrabalhador", extra[1]);
                                     trocaAct.putExtra("idServico", idServico+"");
                                     trocaAct.putExtra("nomeTrabalhador", extra[0]);

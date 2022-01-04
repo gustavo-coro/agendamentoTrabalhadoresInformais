@@ -37,6 +37,9 @@ public class SelecionarServico extends AppCompatActivity {
     private ItemListaServico adaptar;
     private int idTipoServico = -1;
 
+    //Em caso do usuário ter acabado de se cadastrar
+    int idUsuario = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,9 @@ public class SelecionarServico extends AppCompatActivity {
 
         Intent intencao = getIntent();
         idTipoServico = intencao.getIntExtra("id", -1);
+        if (GlobalVar.idUsuario == -1) {
+            idUsuario = intencao.getIntExtra("idUsuario", -1);
+        }
 
         //responsavel por chamar todos os eventos dos botoes
         eventos();
@@ -182,7 +188,12 @@ public class SelecionarServico extends AppCompatActivity {
 
                 parametros.put("servico", "consultaexistenciaservico");
                 parametros.put("idServico", idServico+"");
-                parametros.put("idUsuario", GlobalVar.idUsuario+"");
+                if (GlobalVar.idUsuario != -1) {
+                    parametros.put("idUsuario", GlobalVar.idUsuario+"");
+                } else {
+                    parametros.put("idUsuario", idUsuario+"");
+                }
+
 
                 return parametros;
             }
@@ -233,7 +244,11 @@ public class SelecionarServico extends AppCompatActivity {
 
                 parametros.put("servico", "cadastro");
                 parametros.put("idServico", idServico+"");
-                parametros.put("idUsuario", GlobalVar.idUsuario+"");
+                if (GlobalVar.idUsuario != -1) {
+                    parametros.put("idUsuario", GlobalVar.idUsuario+"");
+                } else {
+                    parametros.put("idUsuario", idUsuario+"");
+                }
 
                 return parametros;
             }

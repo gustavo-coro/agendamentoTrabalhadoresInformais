@@ -15,7 +15,7 @@ public class MenuControle extends AppCompatActivity {
     private Button agendamentoBtn;
     private Button pedidosBtn;
     private Button logoutBtn;
-    private Button editarABtn;
+    private Button aceitosBtn;
     private Button trabalhosConcluidosBtn;
 
 
@@ -31,14 +31,11 @@ public class MenuControle extends AppCompatActivity {
         agendamentoBtn = (Button) findViewById(R.id.agendamentoBtn);
         pedidosBtn = (Button) findViewById(R.id.pedidosBtn);
         logoutBtn = (Button) findViewById(R.id.logoutBtn);
-        editarABtn = (Button) findViewById(R.id.editarAgendaMenuBtn);
+        aceitosBtn = (Button) findViewById(R.id.trabalhosAceitosBtn);
         trabalhosConcluidosBtn = (Button) findViewById(R.id.trabalhosConcluidosBtn);
-
 
         //responsavel por chamar todos os eventos dos botoes
         menuEvento();
-
-
     }
 
     private void menuEvento() {
@@ -58,49 +55,41 @@ public class MenuControle extends AppCompatActivity {
         agendamentoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent trocaAct = new Intent(MenuControle.this, ListarServico.class);
                 startActivity(trocaAct);
-
             }
         });
 
         pedidosBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent trocaAct = new Intent(MenuControle.this, ListarSolicitacoesTrabalho.class);
+                Intent trocaAct = new Intent(MenuControle.this,
+                        ListarSolicitacoesTrabalho.class);
                 startActivity(trocaAct);
-
             }
         });
 
-        editarABtn.setOnClickListener(new View.OnClickListener() {
+        aceitosBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                Intent trocaAct = new Intent(MenuControle.this, EditAgenda.class);
-
+            public void onClick(View v) {
+                Intent trocaAct = new Intent(MenuControle.this,
+                        ListarTrabalhosAceitos.class);
                 startActivity(trocaAct);
-
             }
         });
 
         trabalhosConcluidosBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent trocaAct = new Intent(MenuControle.this, TrabalhosConcluidos.class);
 
                 startActivity(trocaAct);
-
             }
         });
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent trocaAct = new Intent(MenuControle.this, MainActivity.class);
 
                 GlobalVar.usuarioLogin = null;

@@ -37,6 +37,9 @@ public class SelecionarTrabalho extends AppCompatActivity {
     private ArrayList<TiposServicos> tiposServicos;
     private ItemListaTiposServico adaptar;
 
+    //Em caso do usuário ter acabado de se cadastrar
+    int idUsuario = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,11 @@ public class SelecionarTrabalho extends AppCompatActivity {
         listaTrabalhosList = (ListView) findViewById(R.id.selectTrabalhosList);
         confirmaBtn = (Button) findViewById(R.id.confirmaBtn);
         cancelaBtn = (Button) findViewById(R.id.cancelaBtn);
+
+        if (GlobalVar.idUsuario == -1) {
+            Intent intencao = getIntent();
+            idUsuario = intencao.getIntExtra("idUsuario", -1);
+        }
 
         //responsavel por chamar todos os eventos dos botoes
         eventos();
@@ -125,6 +133,10 @@ public class SelecionarTrabalho extends AppCompatActivity {
                                 novoFluxo.putExtra("acao", 0);
                                 novoFluxo.putExtra("id", tiposServicos.get(position).getId());
                                 novoFluxo.putExtra("nome", tiposServicos.get(position).getNomeTipoServico());
+
+                                if (GlobalVar.idUsuario == -1) {
+                                    novoFluxo.putExtra("idUsuario", idUsuario);
+                                }
 
                                 startActivity(novoFluxo);
                             }

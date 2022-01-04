@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ListarSolicitacoesTrabalho">
+        tools:context=".ListarTrabalhosAceitos">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,9 +23,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:text="Lista de Serviços Solicitados"
+                android:text="Serviços Aceitos"
                 android:textAlignment="center"
-                android:textSize="25sp" />
+                android:textSize="35sp" />
 
             <!--Spinner que seleciona o filtro da pesquisa-->
             <LinearLayout
@@ -45,7 +45,7 @@
                 <Spinner
                     android:id="@+id/trabalhadorSpnr"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -56,9 +56,9 @@
                 android:layout_weight="1">
 
                 <ListView
-                    android:id="@+id/listaSolicitacoesList"
+                    android:id="@+id/listaAceitosList"
                     android:layout_width="match_parent"
-                    android:layout_height="450dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/borda_lista"
                     android:nestedScrollingEnabled="true"
@@ -72,7 +72,6 @@
                     android:gravity="center" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"

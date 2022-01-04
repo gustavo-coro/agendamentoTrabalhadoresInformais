@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,109 +21,70 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ControlarPedidoTrabalho extends AppCompatActivity {
+public class TrabalhosAceitos extends AppCompatActivity {
 
     private TextView usuarioTxt;
     private TextView trabalhadorTxt;
-    private TextView tipoServicoTxt;
-    private TextView precoServicoTxt;
-    private TextView enderecoServicoTxt;
+    private TextView servicotxt;
+    private TextView precoTxt;
+    private TextView enderecoTxt;
     private TextView dataTxt;
     private TextView horaTxt;
-    private TextView statusTxt;
-    private Button recusarBtn;
-    private Button aceitarBtn;
-    private Button cancelarBtn;
     private Button editarBtn;
-    private LinearLayout ctrlBtsLL;
-    private LinearLayout statusLL;
+    private Button voltarBtn;
+    private Button finalizarBtn;
 
-    private int idContratacao;
-    private int statusContratacao;
-    private int tipoBusca;
+    private int tipoBusca = -1;
+    private int idContratacao = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_controlar_pedido_trabalho);
+        setContentView(R.layout.activity_trabalhos_aceitos);
 
         getSupportActionBar().hide();
 
         usuarioTxt = (TextView) findViewById(R.id.nomeUsuarioTxt);
         trabalhadorTxt = (TextView) findViewById(R.id.nomeTrabalhadorTxt);
-        tipoServicoTxt = (TextView) findViewById(R.id.tipoServicoTxt);
-        precoServicoTxt = (TextView) findViewById(R.id.precoServicoTxt);
-        enderecoServicoTxt = (TextView) findViewById(R.id.enderecoServicoTxt);
+        servicotxt = (TextView) findViewById(R.id.tipoServicoTxt);
+        precoTxt = (TextView) findViewById(R.id.precoServicoTxt);
+        enderecoTxt = (TextView) findViewById(R.id.enderecoServicoTxt);
         dataTxt = (TextView) findViewById(R.id.dataTxt);
         horaTxt = (TextView) findViewById(R.id.horaInicioTxt);
-        statusTxt = (TextView) findViewById(R.id.statusServicoTxt);
-        recusarBtn = (Button) findViewById(R.id.recusarBtn);
-        aceitarBtn = (Button) findViewById(R.id.aceitarBtn);
-        cancelarBtn = (Button) findViewById(R.id.cancelarBtn);
         editarBtn = (Button) findViewById(R.id.editarBtn);
-        ctrlBtsLL = (LinearLayout) findViewById(R.id.ctrlBtsLL);
-        statusLL = (LinearLayout) findViewById(R.id.statusLL);
+        voltarBtn = (Button) findViewById(R.id.voltarBtn);
+        finalizarBtn = (Button) findViewById(R.id.finalizarBtn);
 
         Intent intencao = getIntent();
-        try {
-            idContratacao = Integer.parseInt(intencao.getStringExtra("id"));
-            statusContratacao = Integer.parseInt(intencao.getStringExtra("aceito"));
-            tipoBusca = Integer.parseInt(intencao.getStringExtra("tipoBusca"));
 
-            //0-Enviadas, 1-Recebidas
+        try {
+            tipoBusca = Integer.parseInt(intencao.getStringExtra("tipoBusca"));
+            idContratacao = Integer.parseInt(intencao.getStringExtra("id"));
             if (tipoBusca == 0) {
-                ctrlBtsLL.setVisibility(View.GONE);
-                statusLL.setVisibility(View.VISIBLE);
-                editarBtn.setVisibility(View.VISIBLE);
-                //0-pendente, 1-aceita(nao tratada nessa activity), 2-recusada
-                if (statusContratacao == 0) {
-                    statusTxt.setText("Aguardando resposta");
-                } else {
-                    statusTxt.setText("Solicitação recusada");
-                }
-            } else {
-                ctrlBtsLL.setVisibility(View.VISIBLE);
-                statusLL.setVisibility(View.GONE);
-                editarBtn.setVisibility(View.GONE);
+                finalizarBtn.setVisibility(View.GONE);
             }
 
             buscaSolicitacao();
 
-            //responsavel por chamar todos os eventos dos botoes
-            controlaPedidoEvento();
         } catch (NumberFormatException ex) {
-            Toast.makeText(ControlarPedidoTrabalho.this, "Erro no formato do id",
+            Toast.makeText(TrabalhosAceitos.this, "Erro no formato das ações",
                     Toast.LENGTH_LONG).show();
             finish();
         }
+
+        //eventos dos botões
+        trabalhosAceitosEventos();
     }
 
-    private void controlaPedidoEvento() {
-
-        recusarBtn.setOnClickListener(new View.OnClickListener() {
+    private void trabalhosAceitosEventos() {
+        voltarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                aceitaRecusaSolicitacao(0);
-            }
-        });
-
-        aceitarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                aceitaRecusaSolicitacao(1);
-            }
-        });
-
-        cancelarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent trocaAct = new Intent(ControlarPedidoTrabalho.this,
-                        ListarSolicitacoesTrabalho.class);
-                startActivity(trocaAct);
+            public void onClick(View v) {
                 finish();
             }
         });
@@ -131,17 +92,24 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
         editarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent trocaAct = new Intent(ControlarPedidoTrabalho.this,
+                Intent trocaAct = new Intent(TrabalhosAceitos.this,
                         AgendamentoTrabalho.class);
                 trocaAct.putExtra("acao", "1");
-                trocaAct.putExtra("idContratacao", idContratacao+"");
+                trocaAct.putExtra("idContratacao", idContratacao + "");
                 startActivity(trocaAct);
                 finish();
             }
         });
+
+        finalizarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalizarServico();
+            }
+        });
     }
 
-    private void  buscaSolicitacao () {
+    private void buscaSolicitacao() {
         RequestQueue pilha = Volley.newRequestQueue(this);
         String url = GlobalVar.urlServidor + "usuariocontrataservico";
 
@@ -161,19 +129,19 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
 
                         usuarioTxt.setText(obj.getString("nome_usuario"));
                         trabalhadorTxt.setText(obj.getString("nome_trabalhador"));
-                        tipoServicoTxt.setText(obj.getString("nome_servico"));
-                        precoServicoTxt.setText(String.format("%.2f",
+                        servicotxt.setText(obj.getString("nome_servico"));
+                        precoTxt.setText(String.format("%.2f",
                                 obj.getDouble("preco")).replace(".", ","));
-                        enderecoServicoTxt.setText(obj.getString("endereco_servico"));
+                        enderecoTxt.setText(obj.getString("endereco_servico"));
                         dataTxt.setText(formatadorData.format(dataServico));
                         horaTxt.setText(formatadorHora.format(dataServico));
 
                     } else {
-                        Toast.makeText(ControlarPedidoTrabalho.this, resposta.getString("informacao"),
+                        Toast.makeText(TrabalhosAceitos.this, resposta.getString("informacao"),
                                 Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException ex) {
-                    Toast.makeText(ControlarPedidoTrabalho.this,
+                    Toast.makeText(TrabalhosAceitos.this,
                             "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.",
                             Toast.LENGTH_LONG).show();
                 }
@@ -181,7 +149,7 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ControlarPedidoTrabalho.this,
+                Toast.makeText(TrabalhosAceitos.this,
                         "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
             }
         }) {
@@ -197,7 +165,7 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
         pilha.add(requisicao);
     }
 
-    private void aceitaRecusaSolicitacao (int aceitaRecusa) {
+    private void finalizarServico() {
         RequestQueue pilha = Volley.newRequestQueue(this);
         String url = GlobalVar.urlServidor + "usuariocontrataservico";
 
@@ -209,28 +177,20 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
 
                     if (resposta.getInt("cod") == 200) {
 
-                        if (aceitaRecusa == 0) {
-                            Toast.makeText(ControlarPedidoTrabalho.this,
-                                    "Solicitação recusada",
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(ControlarPedidoTrabalho.this,
-                                    "Solicitação aceita",
-                                    Toast.LENGTH_LONG).show();
-                        }
-
-                        Intent trocaAct = new Intent(ControlarPedidoTrabalho.this,
-                                ListarSolicitacoesTrabalho.class);
+                        Toast.makeText(TrabalhosAceitos.this,
+                                "Serviço finalizado com sucesso",
+                                Toast.LENGTH_LONG).show();
+                        Intent trocaAct = new Intent(TrabalhosAceitos.this,
+                                MenuControle.class);
                         startActivity(trocaAct);
                         finish();
 
                     } else {
-                        Toast.makeText(ControlarPedidoTrabalho.this,
-                                resposta.getString("informacao"),
+                        Toast.makeText(TrabalhosAceitos.this, resposta.getString("informacao"),
                                 Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException ex) {
-                    Toast.makeText(ControlarPedidoTrabalho.this,
+                    Toast.makeText(TrabalhosAceitos.this,
                             "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.",
                             Toast.LENGTH_LONG).show();
                 }
@@ -238,25 +198,23 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ControlarPedidoTrabalho.this,
+                Toast.makeText(TrabalhosAceitos.this,
                         "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
             }
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
 
+                Calendar hoje = Calendar.getInstance();
+                Date dataHora = new Date(hoje.getTime().getTime());
+                SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 parametros.put("servico", "atualiza");
                 parametros.put("id", idContratacao + "");
-                if (aceitaRecusa == 0) {
-                    parametros.put("aceito", 2 + "");
-                } else {
-                    parametros.put("aceito", 1 + "");
-                }
+                parametros.put("horaFim", formatador.format(dataHora));
 
                 return parametros;
             }
         };
         pilha.add(requisicao);
     }
-
 }

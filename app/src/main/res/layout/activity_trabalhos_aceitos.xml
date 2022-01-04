@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ControlarPedidoTrabalho">
+        tools:context=".TrabalhosAceitos">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
-                android:text="Solicitação"
+                android:text="Serviço Aceito"
                 android:textAlignment="center"
                 android:textSize="35sp" />
 
@@ -174,56 +174,10 @@
                         android:textSize="24sp" />
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/statusLL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="Status: "
-                        android:textSize="22sp" />
-
-                    <TextView
-                        android:id="@+id/statusServicoTxt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Aguardando resposta"
-                        android:textSize="24sp" />
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ctrlBtsLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/aceitarBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:text="Aceitar"
-                    android:textSize="18sp" />
-
-                <Button
-                    android:id="@+id/recusarBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Recusar"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -239,16 +193,23 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/cancelarBtn"
+                    android:id="@+id/voltarBtn"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Voltar"
                     android:textSize="18sp" />
-
             </LinearLayout>
 
+            <Button
+                android:id="@+id/finalizarBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Finalizar"
+                android:textSize="18sp" />
+
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

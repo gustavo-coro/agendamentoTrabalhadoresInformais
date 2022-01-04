@@ -50,7 +50,8 @@ public class ItemListaServico extends ArrayAdapter<Servico> {
         }
         //setando os valores
         novaView.nomeServico.setText(servicoAtual.getNome());
-        novaView.precoServico.setText(String.format("%.2f", servicoAtual.getPreco()));
+        novaView.precoServico.setText(String.format("%.2f",
+                servicoAtual.getPreco()).replace(".",","));
 
         return resultado;
     }

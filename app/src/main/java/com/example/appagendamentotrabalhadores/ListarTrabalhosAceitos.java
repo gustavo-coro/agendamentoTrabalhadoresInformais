@@ -2,7 +2,6 @@ package com.example.appagendamentotrabalhadores;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,12 +32,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListarSolicitacoesTrabalho extends AppCompatActivity {
+public class ListarTrabalhosAceitos extends AppCompatActivity {
 
-    private LinearLayout opcoesExibicaoLL;
+    private ListView aceitosList;
+    private Button cancelaBtn;
     private Spinner trabalhadorSpnr;
-    private ListView solicitacoesList;
-    private Button cancelarBtn;
+    private LinearLayout exibicaoLL;
 
     //Lista usada para no ListView
     private ArrayList<String[]> resultadoList;
@@ -47,31 +46,31 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_solicitacoes_trabalho);
+        setContentView(R.layout.activity_listar_trabalhos_aceitos);
 
         getSupportActionBar().hide();
 
-        opcoesExibicaoLL = (LinearLayout) findViewById(R.id.opcoesExibicaoLL);
+        aceitosList = (ListView) findViewById(R.id.listaAceitosList);
+        cancelaBtn = (Button) findViewById(R.id.cancelaBtn);
         trabalhadorSpnr = (Spinner) findViewById(R.id.trabalhadorSpnr);
-        solicitacoesList = (ListView) findViewById(R.id.listaSolicitacoesList);
-        cancelarBtn = (Button) findViewById(R.id.cancelaBtn);
+        exibicaoLL = (LinearLayout) findViewById(R.id.opcoesExibicaoLL);
         View vazia = findViewById(R.id.listaVaziaTxt);
-        solicitacoesList.setEmptyView(vazia);
+        aceitosList.setEmptyView(vazia);
 
         //eventos dos botoes
-        listarSolicitacoesTrabalhoEventos();
+        trabalhosAceitosEventos();
 
         if (GlobalVar.usuarioIsTrabalhador == 1) {
-            opcoesExibicaoLL.setVisibility(View.VISIBLE);
+            exibicaoLL.setVisibility(View.VISIBLE);
             configuraSpinner();
         } else {
-            opcoesExibicaoLL.setVisibility(View.GONE);
+            exibicaoLL.setVisibility(View.GONE);
             carregaEventosLista(0);
         }
     }
 
-    private void listarSolicitacoesTrabalhoEventos() {
-        cancelarBtn.setOnClickListener(new View.OnClickListener() {
+    private void trabalhosAceitosEventos() {
+        cancelaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -85,7 +84,7 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
         listaItemSpinner.add("Solicitações Enviadas");
         listaItemSpinner.add("Solicitações Recebidas");
 
-        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(ListarSolicitacoesTrabalho.this,
+        ArrayAdapter<String> adapterSpinner = new ArrayAdapter<String>(ListarTrabalhosAceitos.this,
                 android.R.layout.simple_spinner_item, listaItemSpinner);
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -105,7 +104,6 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
     }
 
     private void carregaEventosLista(int tipoBusca) {
-
         resultadoList = new ArrayList<>();
 
         RequestQueue pilha = Volley.newRequestQueue(this);
@@ -120,7 +118,7 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
 
                     if (resposta.getInt("cod") == 200) {
                         JSONArray servicosJSON = resposta.getJSONArray("informacao");
-                        solicitacoesList.getEmptyView().setActivated(false);
+                        aceitosList.getEmptyView().setActivated(false);
 
                         for (int i = 0; i < servicosJSON.length(); i++) {
                             JSONObject obj = servicosJSON.getJSONObject(i);
@@ -140,16 +138,15 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
                         }
 
                         adapter = new ItemListaSolicitacao(getApplication(), resultadoList);
-                        solicitacoesList.setAdapter(adapter);
+                        aceitosList.setAdapter(adapter);
 
-                        solicitacoesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        aceitosList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent trocaAct = new Intent(ListarSolicitacoesTrabalho.this,
-                                        ControlarPedidoTrabalho.class);
-                                String extra [] = resultadoList.get(position);
+                                Intent trocaAct = new Intent(ListarTrabalhosAceitos.this,
+                                        TrabalhosAceitos.class);
+                                String extra[] = resultadoList.get(position);
                                 trocaAct.putExtra("id", extra[0]);
-                                trocaAct.putExtra("aceito", extra[1]);
                                 trocaAct.putExtra("tipoBusca", tipoBusca+"");
                                 startActivity(trocaAct);
                                 finish();
@@ -158,19 +155,19 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
 
                     } else if (resposta.getInt("cod") == 204) {
                         adapter = new ItemListaSolicitacao(getApplication(), resultadoList);
-                        solicitacoesList.setAdapter(adapter);
-                        solicitacoesList.getEmptyView().setActivated(true);
+                        aceitosList.setAdapter(adapter);
+                        aceitosList.getEmptyView().setActivated(true);
                     } else {
                         adapter = new ItemListaSolicitacao(getApplication(), resultadoList);
-                        solicitacoesList.setAdapter(adapter);
-                        solicitacoesList.getEmptyView().setActivated(true);
-                        Toast.makeText(ListarSolicitacoesTrabalho.this,
+                        aceitosList.setAdapter(adapter);
+                        aceitosList.getEmptyView().setActivated(true);
+                        Toast.makeText(ListarTrabalhosAceitos.this,
                                 resposta.getString("informacao"),
                                 Toast.LENGTH_LONG).show();
                     }
 
                 } catch (JSONException ex) {
-                    Toast.makeText(ListarSolicitacoesTrabalho.this,
+                    Toast.makeText(ListarTrabalhosAceitos.this,
                             "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.",
                             Toast.LENGTH_LONG).show();
                 }
@@ -178,26 +175,24 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ListarSolicitacoesTrabalho.this,
+                Toast.makeText(ListarTrabalhosAceitos.this,
                         "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
             }
         }) {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
 
-                parametros.put("servico", "consultasolicitacao");
+                parametros.put("servico", "consultaaceita");
                 if (tipoBusca == 0) {
                     parametros.put("idUsuario", GlobalVar.idUsuario+"");
                 } else {
                     parametros.put("idTrabalhador", GlobalVar.idUsuario+"");
                 }
-                Date dataAtual = Calendar.getInstance().getTime();
-                SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                parametros.put("dataAtual", formatador.format(dataAtual));
 
                 return parametros;
             }
         };
         pilha.add(requisicao);
     }
+
 }

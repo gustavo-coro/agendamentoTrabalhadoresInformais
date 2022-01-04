@@ -50,7 +50,7 @@ public class Cadastro extends AppCompatActivity {
 
     private TextView tituloTxt;
     private TextInputLayout nomeTxt;
-    private TextView dataNascTxt;
+    private TextInputLayout dataNascTxt;
     private TextView opcaoTrabalhadorTxt;
     private TextInputLayout cpfTxt;
     private TextInputLayout enderecoTxt;
@@ -77,7 +77,7 @@ public class Cadastro extends AppCompatActivity {
         //Link entre os atributos java e os componentes XML
         tituloTxt = (TextView) findViewById(R.id.tituloCadTxt);
         nomeTxt = (TextInputLayout) findViewById(R.id.nomeCadastroTxt);
-        dataNascTxt = (TextView) findViewById(R.id.dataNascTxt);
+        dataNascTxt = (TextInputLayout) findViewById(R.id.dataNascTxt);
         opcaoTrabalhadorTxt = (TextView) findViewById(R.id.opcaoTrabalhadorTxt);
         cpfTxt = (TextInputLayout) findViewById(R.id.cpfCadastroTxt);
         enderecoTxt = (TextInputLayout) findViewById(R.id.enderecoCadastroTxt);
@@ -118,12 +118,7 @@ public class Cadastro extends AppCompatActivity {
             descricaoTxt.setEndIconVisible(false);
         } else if (operacao == 1) {
             //Mudando a visibilidade do icone, mostrando ao usuário que ele pode editar as informações
-            nomeTxt.setEndIconVisible(true);
-            cpfTxt.setEndIconVisible(true);
-            enderecoTxt.setEndIconVisible(true);
-            emailTxt.setEndIconVisible(true);
-            celularTxt.setEndIconVisible(true);
-            descricaoTxt.setEndIconVisible(true);
+            dataNascTxt.setEndIconDrawable(R.drawable.ic_baseline_edit_calendar_24);
 
             tituloTxt.setText("Editar");
             cdtBtn.setText("Atualizar");
@@ -202,6 +197,7 @@ public class Cadastro extends AppCompatActivity {
             Toast toast = Toast.makeText(Cadastro.this,
                     "Erro na identificação da ação", Toast.LENGTH_LONG);
             toast.show();
+            finish();
         }
     }
 
@@ -224,7 +220,7 @@ public class Cadastro extends AppCompatActivity {
 
         String pattern = "dd/MM/yyyy";
         SimpleDateFormat formatador = new SimpleDateFormat(pattern);
-        dataNascTxt.setText(formatador.format(dataUsuario.getTime()));
+        dataNascTxt.getEditText().setText(formatador.format(dataUsuario.getTime()));
 
     }
 
@@ -258,7 +254,7 @@ public class Cadastro extends AppCompatActivity {
                     dataUsuario.set(ano, mes, dia);
                     String pattern = "dd/MM/yyyy";
                     SimpleDateFormat formatador = new SimpleDateFormat(pattern);
-                    dataNascTxt.setText(formatador.format(dataUsuario.getTime()));
+                    dataNascTxt.getEditText().setText(formatador.format(dataUsuario.getTime()));
                 }
 
             }
@@ -301,7 +297,7 @@ public class Cadastro extends AppCompatActivity {
             }
         });
 
-        dataNascTxt.setOnClickListener(new View.OnClickListener() {
+        dataNascTxt.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 calendarioUsuario.show();
@@ -394,10 +390,15 @@ public class Cadastro extends AppCompatActivity {
                 String telefone = celularTxt.getEditText().getText().toString();
                 String cpf = cpfTxt.getEditText().getText().toString();
                 String descricao = descricaoTxt.getEditText().getText().toString();
-                float media = GlobalVar.usuarioLogin.getMediaAvaliacao();
+                float media;
+                if (operacao == 1) {
+                    media = GlobalVar.usuarioLogin.getMediaAvaliacao();
+                } else {
+                    media = 0;
+                }
 
                 //trabalhando com a data de nascimento do usuario
-                String nascimentoStr = dataNascTxt.getText().toString();
+                String nascimentoStr = dataNascTxt.getEditText().getText().toString();
                 String pattern = "dd/MM/yyyy";
                 SimpleDateFormat formatador = new SimpleDateFormat(pattern);
 
@@ -490,13 +491,16 @@ public class Cadastro extends AppCompatActivity {
                     JSONObject resposta = new JSONObject(response);
 
                     if (resposta.getInt("cod") == 200) {
-                        Toast.makeText(Cadastro.this, resposta.getString("informacao"),
+                        Toast.makeText(Cadastro.this,
+                                "Cadastro feito com sucesso!",
                                 Toast.LENGTH_LONG).show();
 
                         Intent trocaAct;
 
                         if (usuarioCheck.isChecked()) {
+                            int idCadastro = resposta.getInt("informacao");
                             trocaAct = new Intent(Cadastro.this, SelecionarTrabalho.class);
+                            trocaAct.putExtra("idUsuario", idCadastro);
                             startActivity(trocaAct);
                             finish();
                         } else {
@@ -626,12 +630,12 @@ public class Cadastro extends AppCompatActivity {
                     JSONObject resposta = new JSONObject(response);
 
                     if (resposta.getInt("cod") == 200) {
-                        Toast.makeText(Cadastro.this, resposta.getString("informacao"),
+                        Toast.makeText(Cadastro.this,
+                                "Deleção foi um sucesso",
                                 Toast.LENGTH_LONG).show();
 
                         GlobalVar.idUsuario = -1;
                         Intent trocaAct = new Intent(Cadastro.this, MainActivity.class);
-                        ;
                         startActivity(trocaAct);
                         finish();
 
@@ -655,7 +659,7 @@ public class Cadastro extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
 
-                parametros.put("servico", "deleta");
+                parametros.put("servico", "desativa");
                 parametros.put("id", GlobalVar.idUsuario + "");
 
                 return parametros;
