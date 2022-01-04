@@ -59,6 +59,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
     //0-cadastro, 1-editar
     private int acao = -1;
     private int idContratacao;
+    private int tipoUsuario = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
                 mostraDataAtual();
             } else if (acao == 1) {
                 idContratacao = Integer.parseInt(intencao.getStringExtra("idContratacao"));
+                tipoUsuario = Integer.parseInt(intencao.getStringExtra("tipoUsuario"));
             }
             //preenche a activity com as informações do serviço consultado
             preencheInformacoes();
@@ -383,7 +385,11 @@ public class AgendamentoTrabalho extends AppCompatActivity {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("servico", "atualiza");
                 parametros.put("id", idContratacao+"");
-                parametros.put("aceito", 0+"");
+                if (tipoUsuario == 0) {
+                    parametros.put("aceito", 0+"");
+                } else if (tipoUsuario == 1) {
+                    parametros.put("aceito", "3");
+                }
                 SimpleDateFormat formatador = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 parametros.put("horaInicio", formatador.format(dataServico));
                 parametros.put("endereco", enderecoTxt.getText().toString());

@@ -62,7 +62,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/borda_lista"
                 android:nestedScrollingEnabled="true"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"
+                android:padding="5dp" />
 
             <TextView
                 android:id="@+id/listaVaziaTxt"

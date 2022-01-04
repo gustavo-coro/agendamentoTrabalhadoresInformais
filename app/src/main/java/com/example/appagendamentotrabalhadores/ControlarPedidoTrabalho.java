@@ -79,11 +79,15 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
                 ctrlBtsLL.setVisibility(View.GONE);
                 statusLL.setVisibility(View.VISIBLE);
                 editarBtn.setVisibility(View.VISIBLE);
-                //0-pendente, 1-aceita(nao tratada nessa activity), 2-recusada
+                //0-pendente, 1-aceita, 2-recusada, 3-editada pelo trabalhador
                 if (statusContratacao == 0) {
                     statusTxt.setText("Aguardando resposta");
-                } else {
+                } else if (statusContratacao == 2){
                     statusTxt.setText("Solicitação recusada");
+                } else if (statusContratacao == 3) {
+                    statusTxt.setText("Solicitação modificada pelo trabalhador");
+                    ctrlBtsLL.setVisibility(View.VISIBLE);
+                    recusarBtn.setVisibility(View.GONE);
                 }
             } else {
                 ctrlBtsLL.setVisibility(View.VISIBLE);
@@ -135,6 +139,7 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
                         AgendamentoTrabalho.class);
                 trocaAct.putExtra("acao", "1");
                 trocaAct.putExtra("idContratacao", idContratacao+"");
+                trocaAct.putExtra("tipoUsuario", 0+"");
                 startActivity(trocaAct);
                 finish();
             }

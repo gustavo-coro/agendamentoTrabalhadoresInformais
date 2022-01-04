@@ -92,10 +92,16 @@ public class TrabalhosAceitos extends AppCompatActivity {
         editarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //fazer alterações referente ao trabalhador editando o servico
                 Intent trocaAct = new Intent(TrabalhosAceitos.this,
                         AgendamentoTrabalho.class);
                 trocaAct.putExtra("acao", "1");
                 trocaAct.putExtra("idContratacao", idContratacao + "");
+                if (tipoBusca == 0) {
+                    trocaAct.putExtra("tipoUsuario", 0+"");
+                } else if (tipoBusca == 1) {
+                    trocaAct.putExtra("tipoUsuario", 1+"");
+                }
                 startActivity(trocaAct);
                 finish();
             }
@@ -135,6 +141,12 @@ public class TrabalhosAceitos extends AppCompatActivity {
                         enderecoTxt.setText(obj.getString("endereco_servico"));
                         dataTxt.setText(formatadorData.format(dataServico));
                         horaTxt.setText(formatadorHora.format(dataServico));
+
+                        Date agora = new Date(Calendar.getInstance().getTime().getTime());
+
+                        if (tipoBusca == 1 && agora.before(dataServico)) {
+                            finalizarBtn.setEnabled(false);
+                        }
 
                     } else {
                         Toast.makeText(TrabalhosAceitos.this, resposta.getString("informacao"),
