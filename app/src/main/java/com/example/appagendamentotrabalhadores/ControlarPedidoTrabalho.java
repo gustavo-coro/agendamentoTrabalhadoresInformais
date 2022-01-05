@@ -90,9 +90,16 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
                     recusarBtn.setVisibility(View.GONE);
                 }
             } else {
-                ctrlBtsLL.setVisibility(View.VISIBLE);
-                statusLL.setVisibility(View.GONE);
-                editarBtn.setVisibility(View.GONE);
+                if (statusContratacao == 3) {
+                    ctrlBtsLL.setVisibility(View.GONE);
+                    statusLL.setVisibility(View.VISIBLE);
+                    editarBtn.setVisibility(View.VISIBLE);
+                    statusTxt.setText("Solicitação foi alterada. Aguardando retorno do contratante");
+                } else {
+                    ctrlBtsLL.setVisibility(View.VISIBLE);
+                    statusLL.setVisibility(View.GONE);
+                    editarBtn.setVisibility(View.GONE);
+                }
             }
 
             buscaSolicitacao();
@@ -139,7 +146,11 @@ public class ControlarPedidoTrabalho extends AppCompatActivity {
                         AgendamentoTrabalho.class);
                 trocaAct.putExtra("acao", "1");
                 trocaAct.putExtra("idContratacao", idContratacao+"");
-                trocaAct.putExtra("tipoUsuario", 0+"");
+                if (statusContratacao == 3 && tipoBusca == 1) {
+                    trocaAct.putExtra("tipoUsuario", 1+"");
+                } else {
+                    trocaAct.putExtra("tipoUsuario", 0+"");
+                }
                 startActivity(trocaAct);
                 finish();
             }

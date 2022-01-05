@@ -40,7 +40,7 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
     private ListView solicitacoesList;
     private Button cancelarBtn;
 
-    //Lista usada para no ListView
+    //Lista usada no ListView
     private ArrayList<String[]> resultadoList;
     private ItemListaSolicitacao adapter;
 
@@ -105,7 +105,6 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
     }
 
     private void carregaEventosLista(int tipoBusca) {
-
         resultadoList = new ArrayList<>();
 
         RequestQueue pilha = Volley.newRequestQueue(this);
