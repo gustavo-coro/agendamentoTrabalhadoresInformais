@@ -32,7 +32,7 @@ public class ItemListaConcluido extends ArrayAdapter<String[]> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         String[] servicoAtual = concluidos.get(position);
-        ItemListaConcluido.ViewHolder novaView;
+        ViewHolder novaView;
         final View resultado;
 
         //primeira vez em que a lista é criada

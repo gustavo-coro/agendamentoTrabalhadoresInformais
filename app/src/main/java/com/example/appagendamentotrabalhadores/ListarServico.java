@@ -39,11 +39,11 @@ public class ListarServico extends AppCompatActivity {
     private Button cancelaBtn;
     private TextView listaVaziaTxt;
 
-    //Lista usada para no ListView
+    //Lista usada no ListView
     private ArrayList<Servico> servicos;
     private ItemListaServico adaptar;
 
-    //Lista usada para no Spinner
+    //Lista usada no Spinner
     private List<TiposServicos> tiposServicosList;
 
     @Override

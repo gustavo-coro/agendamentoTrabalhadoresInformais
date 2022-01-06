@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TomVerde">
         <activity
+            android:name=".ListarTrabalhosConcluidos"
+            android:exported="true" />
+        <activity
             android:name=".TrabalhosAceitos"
             android:exported="true" />
         <activity
@@ -32,9 +35,6 @@
             android:exported="true" />
         <activity
             android:name=".SelecionarTrabalho"
-            android:exported="true" />
-        <activity
-            android:name=".TrabalhosConcluidos"
             android:exported="true" />
         <activity
             android:name=".Cadastro"

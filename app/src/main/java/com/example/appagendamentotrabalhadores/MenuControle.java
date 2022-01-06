@@ -81,7 +81,7 @@ public class MenuControle extends AppCompatActivity {
         trabalhosConcluidosBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent trocaAct = new Intent(MenuControle.this, TrabalhosConcluidos.class);
+                Intent trocaAct = new Intent(MenuControle.this, ListarTrabalhosConcluidos.class);
 
                 startActivity(trocaAct);
             }
