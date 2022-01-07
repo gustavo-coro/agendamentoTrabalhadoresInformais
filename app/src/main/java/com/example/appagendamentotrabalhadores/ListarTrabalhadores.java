@@ -51,7 +51,7 @@ public class ListarTrabalhadores extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_trabalhadores);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Lista de Trabalhadores");
 
         listaTrabalhadoresList = (ListView) findViewById(R.id.listaTrabalhadoresList);
         cancelaBtn = (Button) findViewById(R.id.cancelaBtn);

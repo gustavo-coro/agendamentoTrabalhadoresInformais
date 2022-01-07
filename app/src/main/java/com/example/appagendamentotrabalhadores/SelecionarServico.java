@@ -45,7 +45,7 @@ public class SelecionarServico extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selecionar_servico);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Selecionar Serviço");
 
         listaServicosList = (ListView) findViewById(R.id.selectServicoList);
         confirmaBtn = (Button) findViewById(R.id.confirmaBtn);

@@ -49,7 +49,7 @@ public class ListarSolicitacoesTrabalho extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_solicitacoes_trabalho);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Lista de Serviços Solicitados");
 
         opcoesExibicaoLL = (LinearLayout) findViewById(R.id.opcoesExibicaoLL);
         trabalhadorSpnr = (Spinner) findViewById(R.id.trabalhadorSpnr);

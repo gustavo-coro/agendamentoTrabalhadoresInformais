@@ -19,21 +19,12 @@
             android:orientation="vertical"
             android:padding="15dp">
 
-            <TextView
-                android:id="@+id/tituloTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="Agendar um  trabalho"
-                android:textAlignment="center"
-                android:textSize="35sp" />
-
             <!--LinearLayout com o nome do trabalhador que presta os servicos-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
@@ -158,6 +149,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:text="Confirmar"
+                    android:textAllCaps="false"
                     android:textSize="18sp" />
 
                 <Button
@@ -167,6 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Cancelar"
+                    android:textAllCaps="false"
                     android:textSize="18sp" />
 
             </LinearLayout>

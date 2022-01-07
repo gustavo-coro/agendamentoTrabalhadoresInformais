@@ -49,7 +49,7 @@ public class ListarTrabalhosConcluidos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_trabalhos_concluidos);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Trabalhos Concluídos");
 
         trabalhosList = (ListView) findViewById(R.id.trabalhosList);
         voltarBtn = (Button) findViewById(R.id.voltarBtn);

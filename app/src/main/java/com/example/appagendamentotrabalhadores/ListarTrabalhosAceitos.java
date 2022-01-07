@@ -48,7 +48,7 @@ public class ListarTrabalhosAceitos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_trabalhos_aceitos);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Serviços Aceitos");
 
         aceitosList = (ListView) findViewById(R.id.listaAceitosList);
         cancelaBtn = (Button) findViewById(R.id.cancelaBtn);

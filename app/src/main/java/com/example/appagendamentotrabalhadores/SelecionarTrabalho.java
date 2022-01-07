@@ -45,7 +45,7 @@ public class SelecionarTrabalho extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selecionar_trabalho);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Selecionar Tipo de Serviço");
 
         listaTrabalhosList = (ListView) findViewById(R.id.selectTrabalhosList);
         confirmaBtn = (Button) findViewById(R.id.confirmaBtn);

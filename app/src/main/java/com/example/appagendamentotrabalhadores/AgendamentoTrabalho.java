@@ -42,7 +42,6 @@ public class AgendamentoTrabalho extends AppCompatActivity {
     private Calendar calendarioTemp;
     private Calendar dataAtual;
 
-    private TextView tituloTxt;
     private TextView trabalhadorTxt;
     private TextView nomeServicoTxt;
     private TextView dataTxt;
@@ -66,9 +65,6 @@ public class AgendamentoTrabalho extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendamento_trabalho);
 
-        getSupportActionBar().hide();
-
-        tituloTxt = (TextView) findViewById(R.id.tituloTxt);
         trabalhadorTxt = (TextView) findViewById(R.id.nomeTrabalhadorTxt);
         nomeServicoTxt = (TextView) findViewById(R.id.nomeServicoTxt);
         enderecoTxt = (EditText) findViewById(R.id.enderecoTxt);
@@ -210,6 +206,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
             nomeServicoTxt.setText(nomeServico);
             trabalhadorTxt.setText(nomeTrabalhador);
             enderecoTxt.setText(GlobalVar.usuarioLogin.getEndereco());
+            getSupportActionBar().setTitle("Agendar Novo Serviço");
         } else if (acao==1) {
 
             RequestQueue pilha = Volley.newRequestQueue(this);
@@ -235,7 +232,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
                             enderecoTxt.setText(obj.getString("endereco_servico"));
                             dataTxt.setText(formatadorData.format(dataServico));
                             horaTxt.setText(formatadorHora.format(dataServico));
-                            tituloTxt.setText("Editar solicitação");
+                            getSupportActionBar().setTitle("Editar Solicitação");
                             cancelarBtn.setText("Excluir");
 
                         } else {

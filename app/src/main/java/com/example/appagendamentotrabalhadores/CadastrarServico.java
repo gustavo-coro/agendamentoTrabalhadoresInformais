@@ -27,7 +27,7 @@ public class CadastrarServico extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_servico);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Cadastrar Serviço");
 
         nomeTipoServicoTxt = (TextView) findViewById(R.id.tipoServicoSelectTxt);
         nomeServicoTxt = (EditText) findViewById(R.id.nomeServicoTxt);

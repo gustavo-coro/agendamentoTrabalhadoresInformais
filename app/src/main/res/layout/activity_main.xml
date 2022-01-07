@@ -19,25 +19,12 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="195dp"
+                android:layout_height="125dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="3dp"
-                android:text="ATI"
-                android:textAlignment="center"
-                android:textSize="30sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="45dp"
-                android:text="Agendamento de Trabalhadores Informais"
-                android:textAlignment="center"
-                android:textSize="18sp" />
-
+                android:layout_marginBottom="35dp"
+                android:background="@mipmap/logo_c" />
 
             <!--LinearLayout que engloba o campo onde o usuario ira digitar suas informacoes-->
             <LinearLayout
@@ -92,7 +79,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
+                android:background="@drawable/custom_round_button"
                 android:text="Entrar"
+                android:textAllCaps="false"
                 android:textSize="20sp" />
 
 
@@ -107,6 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="3dp"
                     android:text="Ainda não possui conta?"
                     android:textSize="18sp" />
 
@@ -115,7 +105,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:background="@drawable/custom_round_button"
                     android:text="Cadastre-se"
+                    android:textAllCaps="false"
                     android:textSize="20sp" />
 
             </LinearLayout>

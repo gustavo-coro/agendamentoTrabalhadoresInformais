@@ -18,19 +18,11 @@
             android:orientation="vertical"
             android:padding="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:text="Serviço Aceito"
-                android:textAlignment="center"
-                android:textSize="35sp" />
-
             <!--LinearLayout que engloba as informacoes do servico pedido-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
                 android:orientation="vertical">
 
@@ -190,6 +182,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:text="Editar"
+                    android:textAllCaps="false"
                     android:textSize="18sp" />
 
                 <Button
@@ -199,6 +192,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Voltar"
+                    android:textAllCaps="false"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -207,6 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Finalizar"
+                android:textAllCaps="false"
                 android:textSize="18sp" />
 
         </LinearLayout>

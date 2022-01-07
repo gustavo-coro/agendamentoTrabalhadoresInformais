@@ -18,20 +18,12 @@
             android:orientation="vertical"
             android:padding="15dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:text="Lista de Serviços Solicitados"
-                android:textAlignment="center"
-                android:textSize="25sp" />
-
             <!--Spinner que seleciona o filtro da pesquisa-->
             <LinearLayout
                 android:id="@+id/opcoesExibicaoLL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="15dp"
                 android:orientation="horizontal">
 
@@ -45,7 +37,7 @@
                 <Spinner
                     android:id="@+id/trabalhadorSpnr"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -62,15 +54,15 @@
                     android:layout_weight="1"
                     android:background="@drawable/borda_lista"
                     android:nestedScrollingEnabled="true"
-                    android:scrollbars="vertical"
-                    android:padding="5dp" />
+                    android:padding="5dp"
+                    android:scrollbars="vertical" />
 
                 <TextView
                     android:id="@+id/listaVaziaTxt"
-                    android:text="Nenhuma solicitação encontrada"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:text="Nenhuma solicitação encontrada" />
 
             </LinearLayout>
 
@@ -87,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Voltar"
+                    android:textAllCaps="false"
                     android:textSize="18sp" />
 
             </LinearLayout>

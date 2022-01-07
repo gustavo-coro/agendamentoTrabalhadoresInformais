@@ -18,15 +18,6 @@
             android:orientation="vertical"
             android:padding="15dp">
 
-            <TextView
-                android:id="@+id/tituloCadTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="25dp"
-                android:text="Cadastro de Serviços"
-                android:textSize="30dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,8 +55,8 @@
                     android:id="@+id/nomeServicoTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="22dp"
-                    android:inputType="textCapSentences|textAutoCorrect" />
+                    android:inputType="textCapSentences|textAutoCorrect"
+                    android:textSize="22dp" />
 
             </LinearLayout>
 
@@ -85,16 +76,16 @@
                     android:id="@+id/precoServicoTxt"
                     android:layout_width="85dp"
                     android:layout_height="wrap_content"
-                    android:textSize="22dp"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textSize="22dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/cadastraServicoBtn"
@@ -103,6 +94,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:text="Cadastrar"
+                    android:textAllCaps="false"
                     android:textSize="20sp" />
 
                 <Button
@@ -112,10 +104,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Cancelar"
+                    android:textAllCaps="false"
                     android:textSize="20sp" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>

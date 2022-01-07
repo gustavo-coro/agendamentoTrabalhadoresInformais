@@ -47,7 +47,7 @@ public class TrabalhosAceitos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trabalhos_aceitos);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Serviço Aceito");
 
         usuarioTxt = (TextView) findViewById(R.id.nomeUsuarioTxt);
         trabalhadorTxt = (TextView) findViewById(R.id.nomeTrabalhadorTxt);

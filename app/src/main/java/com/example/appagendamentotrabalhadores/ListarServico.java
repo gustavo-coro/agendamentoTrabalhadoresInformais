@@ -51,7 +51,7 @@ public class ListarServico extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_servico);
 
-        getSupportActionBar().hide();
+        getSupportActionBar().setTitle("Lista de Serviços");
 
         trabalhoSpnr = (Spinner) findViewById(R.id.trabalhoSpnr);
         listaServicosList = (ListView) findViewById(R.id.listaServicosList);

@@ -48,7 +48,6 @@ public class Cadastro extends AppCompatActivity {
     private Calendar dataUsuario;
     private int idade;
 
-    private TextView tituloTxt;
     private TextInputLayout nomeTxt;
     private TextInputLayout dataNascTxt;
     private TextView opcaoTrabalhadorTxt;
@@ -72,10 +71,7 @@ public class Cadastro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        getSupportActionBar().hide();
-
         //Link entre os atributos java e os componentes XML
-        tituloTxt = (TextView) findViewById(R.id.tituloCadTxt);
         nomeTxt = (TextInputLayout) findViewById(R.id.nomeCadastroTxt);
         dataNascTxt = (TextInputLayout) findViewById(R.id.dataNascTxt);
         opcaoTrabalhadorTxt = (TextView) findViewById(R.id.opcaoTrabalhadorTxt);
@@ -109,6 +105,7 @@ public class Cadastro extends AppCompatActivity {
     //Confere se o usuário quer se cadastrar ou editar suas informações
     private void ajustaOperacao() {
         if (operacao == 0) {
+            getSupportActionBar().setTitle("Cadastrar");
             mostraData();
             nomeTxt.setEndIconVisible(false);
             cpfTxt.setEndIconVisible(false);
@@ -119,8 +116,7 @@ public class Cadastro extends AppCompatActivity {
         } else if (operacao == 1) {
             //Mudando a visibilidade do icone, mostrando ao usuário que ele pode editar as informações
             dataNascTxt.setEndIconDrawable(R.drawable.ic_baseline_edit_calendar_24);
-
-            tituloTxt.setText("Editar");
+            getSupportActionBar().setTitle("Editar");
             cdtBtn.setText("Atualizar");
             voltaBtn.setText("Excluir");
             if(GlobalVar.usuarioIsTrabalhador == 1) {
