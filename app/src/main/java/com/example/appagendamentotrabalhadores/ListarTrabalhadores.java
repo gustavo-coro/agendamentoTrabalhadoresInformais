@@ -55,6 +55,8 @@ public class ListarTrabalhadores extends AppCompatActivity {
 
         listaTrabalhadoresList = (ListView) findViewById(R.id.listaTrabalhadoresList);
         cancelaBtn = (Button) findViewById(R.id.cancelaBtn);
+        View vazia = findViewById(R.id.listaVaziaTxt);
+        listaTrabalhadoresList.setEmptyView(vazia);
 
         Intent intencao = getIntent();
         idServico = intencao.getIntExtra("id", -1);
@@ -90,21 +92,24 @@ public class ListarTrabalhadores extends AppCompatActivity {
 
                     if (resposta.getInt("cod") == 200) {
                         JSONArray usuariosJSON = resposta.getJSONArray("informacao");
+                        listaTrabalhadoresList.getEmptyView().setActivated(false);
 
                         for (int i = 0; i < usuariosJSON.length(); i++) {
                             JSONArray obj = usuariosJSON.getJSONArray(i);
 
-                            String temp[] = new String[4];
+                            String temp[] = new String[5];
 
                             /*temp[0] = tuplas.getString("nome_usuario");
                             temp[1] = tuplas.getInt("idusuario")+"";
                             temp[2] = tuplas.getString("nome_servico");
-                            temp[3] = tuplas.getFloat("preco")+"";*/
+                            temp[3] = tuplas.getFloat("preco")+"";
+                            temp[4] = tuplas.getString("descricao");*/
 
                             temp[0] = (String) obj.getString(0);
                             temp[1] = (String) obj.getString(1);
                             temp[2] = (String) obj.getString(2);
                             temp[3] = (String) obj.getString(3);
+                            temp[4] = (String) obj.getString(4);
                             resultadoLista.add(temp);
                         }
 
@@ -134,6 +139,9 @@ public class ListarTrabalhadores extends AppCompatActivity {
                         });
 
                     } else {
+                        adaptar = new ItemListaUsuario(getApplication(), resultadoLista);
+                        listaTrabalhadoresList.setAdapter(adaptar);
+                        listaTrabalhadoresList.getEmptyView().setActivated(true);
                         Toast.makeText(ListarTrabalhadores.this,
                                 resposta.getString("informacao"), Toast.LENGTH_LONG).show();
                     }

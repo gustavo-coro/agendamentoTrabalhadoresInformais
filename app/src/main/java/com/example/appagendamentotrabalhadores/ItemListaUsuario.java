@@ -18,6 +18,7 @@ public class ItemListaUsuario extends ArrayAdapter<String[]> {
         private TextView nomeUsuario;
         private TextView servicoLista;
         private TextView precoServico;
+        private TextView descricaoUsuarioListaTxt;
     }
 
     public ItemListaUsuario(Context contexto, ArrayList<String[]> dados) {
@@ -41,6 +42,8 @@ public class ItemListaUsuario extends ArrayAdapter<String[]> {
             novaView.nomeUsuario = (TextView) convertView.findViewById(R.id.nomeUsuarioListaTxt);
             novaView.servicoLista = (TextView) convertView.findViewById(R.id.servicoListaTxt);
             novaView.precoServico = (TextView) convertView.findViewById(R.id.precoServicoListaTxt);
+            novaView.descricaoUsuarioListaTxt =
+                    (TextView) convertView.findViewById(R.id.descricaoUsuarioListaTxt);
 
             resultado = convertView;
             convertView.setTag(novaView);
@@ -53,6 +56,7 @@ public class ItemListaUsuario extends ArrayAdapter<String[]> {
         novaView.nomeUsuario.setText(usuarioAtual[0]);
         novaView.servicoLista.setText(usuarioAtual[2]);
         novaView.precoServico.setText(usuarioAtual[3]);
+        novaView.descricaoUsuarioListaTxt.setText(usuarioAtual[4]);
 
         return resultado;
     }

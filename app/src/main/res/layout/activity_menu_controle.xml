@@ -19,23 +19,13 @@
             android:padding="15dp">
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:layout_width="175dp"
+                android:layout_height="84dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="3dp"
-                android:text="ATI"
-                android:textAlignment="center"
-                android:textSize="30sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="18dp"
-                android:text="Agendamento de Trabalhadores Informais"
-                android:textAlignment="center"
-                android:textSize="18sp" />
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@mipmap/logo_e" />
 
             <!--LinearLayout que engloba as informaçoes de perfil do usuario-->
             <LinearLayout
@@ -50,9 +40,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="3dp"
                     android:text="Usuário"
                     android:textAlignment="center"
-                    android:layout_marginBottom="3dp"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 

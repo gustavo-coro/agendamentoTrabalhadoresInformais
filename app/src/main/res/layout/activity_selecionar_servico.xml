@@ -17,15 +17,30 @@
             android:orientation="vertical"
             android:padding="15dp">
 
-            <ListView
-                android:id="@+id/selectServicoList"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="450dp"
                 android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="@drawable/borda_lista"
-                android:nestedScrollingEnabled="true"
-                android:padding="5dp" />
+                android:layout_weight="1">
+
+                <ListView
+                    android:id="@+id/selectServicoList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/borda_lista"
+                    android:nestedScrollingEnabled="true"
+                    android:padding="5dp"
+                    android:scrollbars="vertical" />
+
+                <TextView
+                    android:id="@+id/listaVaziaTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Nenhuma registro encontrado" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

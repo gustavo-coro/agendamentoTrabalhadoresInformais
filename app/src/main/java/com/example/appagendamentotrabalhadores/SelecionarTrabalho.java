@@ -50,6 +50,8 @@ public class SelecionarTrabalho extends AppCompatActivity {
         listaTrabalhosList = (ListView) findViewById(R.id.selectTrabalhosList);
         confirmaBtn = (Button) findViewById(R.id.confirmaBtn);
         cancelaBtn = (Button) findViewById(R.id.cancelaBtn);
+        View vazia = findViewById(R.id.listaVaziaTxt);
+        listaTrabalhosList.setEmptyView(vazia);
 
         if (GlobalVar.idUsuario == -1) {
             Intent intencao = getIntent();
@@ -114,6 +116,7 @@ public class SelecionarTrabalho extends AppCompatActivity {
                     if (resposta.getInt("cod") == 200) {
 
                         JSONArray servicosJSON = resposta.getJSONArray("informacao");
+                        listaTrabalhosList.getEmptyView().setActivated(false);
 
                         for (int i = 0; i < servicosJSON.length(); i++) {
                             JSONObject obj = servicosJSON.getJSONObject(i);
@@ -143,6 +146,9 @@ public class SelecionarTrabalho extends AppCompatActivity {
                         });
 
                     } else {
+                        adaptar = new ItemListaTiposServico(getApplication(), tiposServicos);
+                        listaTrabalhosList.setAdapter(adaptar);
+                        listaTrabalhosList.getEmptyView().setActivated(true);
                         Toast.makeText(SelecionarTrabalho.this, resposta.getString("informacao"),
                                 Toast.LENGTH_LONG).show();
                     }

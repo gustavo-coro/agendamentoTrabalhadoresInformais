@@ -50,6 +50,8 @@ public class SelecionarServico extends AppCompatActivity {
         listaServicosList = (ListView) findViewById(R.id.selectServicoList);
         confirmaBtn = (Button) findViewById(R.id.confirmaBtn);
         cancelaBtn = (Button) findViewById(R.id.cancelaBtn);
+        View vazia = findViewById(R.id.listaVaziaTxt);
+        listaServicosList.setEmptyView(vazia);
 
         Intent intencao = getIntent();
         idTipoServico = intencao.getIntExtra("id", -1);
@@ -97,6 +99,7 @@ public class SelecionarServico extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject resposta = new JSONObject(response);
+                    listaServicosList.getEmptyView().setActivated(false);
 
                     if (resposta.getInt("cod") == 200) {
 
@@ -121,6 +124,9 @@ public class SelecionarServico extends AppCompatActivity {
                         });
 
                     } else {
+                        adaptar = new ItemListaServico(getApplication(), servicos);
+                        listaServicosList.setAdapter(adaptar);
+                        listaServicosList.getEmptyView().setActivated(true);
                         Toast.makeText(SelecionarServico.this, resposta.getString("informacao"),
                                 Toast.LENGTH_LONG).show();
                     }
