@@ -91,6 +91,7 @@ public class ListarTrabalhosConcluidos extends AppCompatActivity {
         adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         trabalhadorSpnr.setAdapter(adapterSpinner);
+        trabalhadorSpnr.setSelection(0);
 
         trabalhadorSpnr.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

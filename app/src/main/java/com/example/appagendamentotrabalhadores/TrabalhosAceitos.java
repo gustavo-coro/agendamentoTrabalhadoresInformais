@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TrabalhosAceitos extends AppCompatActivity {
+public class TrabalhosAceitos extends AppCompatActivity implements CustomRatePickerDialog.CustomDialogListener {
 
     private TextView usuarioTxt;
     private TextView trabalhadorTxt;
@@ -39,6 +39,7 @@ public class TrabalhosAceitos extends AppCompatActivity {
     private Button voltarBtn;
     private Button finalizarBtn;
 
+    //variáveis de controle de ações
     private int tipoBusca = -1;
     private int idContratacao = -1;
 
@@ -110,7 +111,7 @@ public class TrabalhosAceitos extends AppCompatActivity {
         finalizarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finalizarServico();
+                abrirDialog();
             }
         });
     }
@@ -177,7 +178,7 @@ public class TrabalhosAceitos extends AppCompatActivity {
         pilha.add(requisicao);
     }
 
-    private void finalizarServico() {
+    private void finalizarServico(float nota) {
         RequestQueue pilha = Volley.newRequestQueue(this);
         String url = GlobalVar.urlServidor + "usuariocontrataservico";
 
@@ -223,10 +224,22 @@ public class TrabalhosAceitos extends AppCompatActivity {
                 parametros.put("servico", "atualiza");
                 parametros.put("id", idContratacao + "");
                 parametros.put("horaFim", formatador.format(dataHora));
+                parametros.put("notaUsuario", nota+"");
 
                 return parametros;
             }
         };
         pilha.add(requisicao);
     }
+
+    private void abrirDialog () {
+        CustomRatePickerDialog customDialog = new CustomRatePickerDialog();
+        customDialog.show(getSupportFragmentManager(), "custom dialog");
+    }
+
+    @Override
+    public void applyFloat(float nota) {
+        finalizarServico(nota);
+    }
+
 }
