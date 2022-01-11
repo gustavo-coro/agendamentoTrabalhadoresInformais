@@ -166,13 +166,14 @@
             <TextView
                 android:id="@+id/horaFimTxt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:text="00:00"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

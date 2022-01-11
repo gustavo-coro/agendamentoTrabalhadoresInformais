@@ -21,6 +21,7 @@ public class ItemListaConcluido extends ArrayAdapter<String[]> {
         private TextView horaInicioTxt;
         private TextView dataFimTxt;
         private TextView horaFimTxt;
+        private TextView notaSelecioadaTxt;
     }
 
     public ItemListaConcluido(Context contexto, ArrayList<String[]> dados) {
