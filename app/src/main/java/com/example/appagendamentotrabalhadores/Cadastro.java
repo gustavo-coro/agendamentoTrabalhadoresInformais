@@ -390,7 +390,7 @@ public class Cadastro extends AppCompatActivity {
                 if (operacao == 1) {
                     media = GlobalVar.usuarioLogin.getMediaAvaliacao();
                 } else {
-                    media = 0;
+                    media = -1;
                 }
 
                 //trabalhando com a data de nascimento do usuario

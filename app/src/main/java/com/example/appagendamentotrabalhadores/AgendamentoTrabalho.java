@@ -79,6 +79,7 @@ public class AgendamentoTrabalho extends AppCompatActivity {
             dataAtual = Calendar.getInstance();
             calendarioTemp = Calendar.getInstance();
 
+            //0-cadastro, 1-editar
             acao = Integer.parseInt(intencao.getStringExtra("acao"));
             if (acao == 0) {
                 idServico = Integer.parseInt(intencao.getStringExtra("idServico"));
@@ -281,11 +282,73 @@ public class AgendamentoTrabalho extends AppCompatActivity {
             calendarioTemp.set(Calendar.SECOND, 0);
             calendarioTemp.set(Calendar.MILLISECOND, 0);
             if (acao == 0) {
-                agendaServico(new Date(calendarioTemp.getTime().getTime()));
+                confirmarAvaliouTrabalhador();
             } else {
                 atualizaSolicitacao(new Date(calendarioTemp.getTime().getTime()));
             }
         }
+    }
+
+    private void confirmarAvaliouTrabalhador() {
+        RequestQueue pilha = Volley.newRequestQueue(this);
+        String url = GlobalVar.urlServidor + "usuariocontrataservico";
+
+        StringRequest jsonRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject resposta = new JSONObject(response);
+
+                    if (resposta.getInt("cod") == 200) {
+
+                        agendaServico(new Date(calendarioTemp.getTime().getTime()));
+
+                    } else if (resposta.getInt("cod") == 401) {
+
+                        AlertDialog.Builder informacaoAvaliacao =
+                                new AlertDialog.Builder(AgendamentoTrabalho.this);
+                        informacaoAvaliacao.setTitle("Atencão!");
+                        informacaoAvaliacao.setMessage("Você deve avaliar o trabalhador em todos " +
+                                "os serviços concluídos antes de agendar um novo serviço");
+                        informacaoAvaliacao.setPositiveButton("Confirmar",
+                                new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent trocaAct = new Intent(AgendamentoTrabalho.this,
+                                        ListarTrabalhosConcluidos.class);
+                                startActivity(trocaAct);
+                            }
+                        });
+                        informacaoAvaliacao.setIcon(android.R.drawable.ic_dialog_info);
+                        informacaoAvaliacao.show();
+
+                    } else {
+                        Toast.makeText(AgendamentoTrabalho.this,
+                                resposta.getString("informacao"),
+                                Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException ex) {
+                    Toast.makeText(AgendamentoTrabalho.this,
+                            "Erro no formato de rotorno do servidor. Contate a equipe de desenvolvimento.",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(AgendamentoTrabalho.this,
+                        "Erro! Verifique sua conexão e tente novamente.", Toast.LENGTH_LONG).show();
+            }
+        }) {
+            protected Map<String, String> getParams() {
+                Map<String, String> parametros = new HashMap<>();
+                parametros.put("servico", "consultaavaliou");
+                parametros.put("id", GlobalVar.idUsuario+"");
+
+                return parametros;
+            }
+        };
+        pilha.add(jsonRequest);
     }
 
     private void agendaServico(Date dataCadastro) {
@@ -303,7 +366,8 @@ public class AgendamentoTrabalho extends AppCompatActivity {
                                 resposta.getString("informacao"),
                                 Toast.LENGTH_LONG).show();
 
-                        Intent trocaAct = new Intent(AgendamentoTrabalho.this, MenuControle.class);
+                        Intent trocaAct = new Intent(AgendamentoTrabalho.this,
+                                MenuControle.class);
                         startActivity(trocaAct);
                         finish();
 
