@@ -38,6 +38,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ferramentas.UsuarioDb;
 import modelo.Usuario;
@@ -119,7 +121,7 @@ public class Cadastro extends AppCompatActivity {
             getSupportActionBar().setTitle("Editar");
             cdtBtn.setText("Atualizar");
             voltaBtn.setText("Excluir");
-            if(GlobalVar.usuarioIsTrabalhador == 1) {
+            if (GlobalVar.usuarioIsTrabalhador == 1) {
                 opcaoTrabalhadorTxt.setText("Quer começar a oferecer um novo trabalho?");
             } else {
                 opcaoTrabalhadorTxt.setText("Quer começar a oferecer algum trabalho?");
@@ -242,11 +244,11 @@ public class Cadastro extends AppCompatActivity {
                 if (idade < 18) {
 
                     dataUsuario = Calendar.getInstance();
-                    Toast toast = Toast.makeText(Cadastro.this, "Você precisa ser maior de 18 para usar o app.", Toast.LENGTH_LONG);
-                    toast.show();
+                    dataNascTxt.setError("Você precisa ser maior de 18 para usar o app");
                     mostraData();
 
                 } else {
+                    dataNascTxt.setError(null);
                     dataUsuario.set(ano, mes, dia);
                     String pattern = "dd/MM/yyyy";
                     SimpleDateFormat formatador = new SimpleDateFormat(pattern);
@@ -312,6 +314,14 @@ public class Cadastro extends AppCompatActivity {
         } else {
             nomeTxt.setError(null);
         }
+        if (idade < 18) {
+            dataUsuario = Calendar.getInstance();
+            dataNascTxt.setError("Selecione uma data de nascimento válida");
+            mostraData();
+            conf = false;
+        } else {
+            dataNascTxt.setError(null);
+        }
         if (celularTxt.getEditText().getText().toString().isEmpty()) {
             celularTxt.setError("Campo não pode estar vazio");
             conf = false;
@@ -321,14 +331,16 @@ public class Cadastro extends AppCompatActivity {
         } else {
             celularTxt.setError(null);
         }
-        if (senhaTxt.getEditText().getText().toString().isEmpty()) {
-            senhaTxt.setError("Campo não pode estar vazio");
+        if (senhaTxt.getEditText().getText().toString().isEmpty() ||
+                senhaTxt.getEditText().getText().toString().trim().length() < 5) {
+            senhaTxt.setError("A senha deve ter pelo menos cinco digitos");
             conf = false;
         } else {
             senhaTxt.setError(null);
         }
-        if (senhaConfirmTxt.getEditText().getText().toString().isEmpty()) {
-            senhaConfirmTxt.setError("Campo não pode estar vazio");
+        if (senhaConfirmTxt.getEditText().getText().toString().isEmpty() ||
+                senhaConfirmTxt.getEditText().getText().toString().trim().length() < 5) {
+            senhaConfirmTxt.setError("A senha deve ter pelo menos cinco digitos");
             conf = false;
         } else {
             senhaConfirmTxt.setError(null);
@@ -348,11 +360,21 @@ public class Cadastro extends AppCompatActivity {
         } else {
             cpfTxt.setError(null);
         }
+
         if (emailTxt.getEditText().getText().toString().isEmpty()) {
             emailTxt.setError("Campo não pode estar vazio");
             conf = false;
         } else {
-            emailTxt.setError(null);
+            String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(emailTxt.getEditText().getText().toString().trim());
+
+            if (matcher.matches() == false) {
+                emailTxt.setError("Preencha o campo com um email válido");
+                conf = false;
+            } else {
+                emailTxt.setError(null);
+            }
         }
         if (enderecoTxt.getEditText().getText().toString().isEmpty()) {
             enderecoTxt.setError("Campo não pode estar vazio");
@@ -365,56 +387,43 @@ public class Cadastro extends AppCompatActivity {
     }
 
     private void cadastraEditaUsuario() {
+        String senha = senhaTxt.getEditText().getText().toString().trim();
+        String confirmaSenha = senhaConfirmTxt.getEditText().getText().toString().trim();
+        if (senha.equals(confirmaSenha)) {
+            senhaConfirmTxt.setError(null);
 
-        if (idade < 18) {
-
-            dataUsuario = Calendar.getInstance();
-            Toast toast = Toast.makeText(Cadastro.this, "Selecione uma data de nascimento válida.", Toast.LENGTH_LONG);
-            toast.show();
-            mostraData();
-
-        } else {
-
-            String senha = senhaTxt.getEditText().getText().toString();
-            String confirmaSenha = senhaConfirmTxt.getEditText().getText().toString();
-            if (senha.equals(confirmaSenha)) {
-                senhaConfirmTxt.setError(null);
-
-                String nome = nomeTxt.getEditText().getText().toString();
-                String endereco = enderecoTxt.getEditText().getText().toString();
-                String email = emailTxt.getEditText().getText().toString();
-                String telefone = celularTxt.getEditText().getText().toString();
-                String cpf = cpfTxt.getEditText().getText().toString();
-                String descricao = descricaoTxt.getEditText().getText().toString();
-                float media;
-                if (operacao == 1) {
-                    media = GlobalVar.usuarioLogin.getMediaAvaliacao();
-                } else {
-                    media = -1;
-                }
-
-                //trabalhando com a data de nascimento do usuario
-                String nascimentoStr = dataNascTxt.getEditText().getText().toString();
-                String pattern = "dd/MM/yyyy";
-                SimpleDateFormat formatador = new SimpleDateFormat(pattern);
-
-                try {
-                    Date diaNasc = formatador.parse(nascimentoStr);
-
-                    Usuario novoUsuario = new Usuario(nome, endereco, diaNasc, email, telefone, cpf, descricao, senha, media);
-
-                    comparaExistenciaDados(novoUsuario);
-
-                } catch (ParseException ex) {
-                    System.err.println("Erro no formato da data...");
-                }
-
+            String nome = nomeTxt.getEditText().getText().toString().trim();
+            String endereco = enderecoTxt.getEditText().getText().toString().trim();
+            String email = emailTxt.getEditText().getText().toString().trim();
+            String telefone = celularTxt.getEditText().getText().toString().trim();
+            String cpf = cpfTxt.getEditText().getText().toString().trim();
+            String descricao = descricaoTxt.getEditText().getText().toString().trim();
+            float media;
+            if (operacao == 1) {
+                media = GlobalVar.usuarioLogin.getMediaAvaliacao();
             } else {
-                senhaConfirmTxt.setError("As senhas não combinam");
+                media = -1;
             }
 
-        }
+            //trabalhando com a data de nascimento do usuario
+            String nascimentoStr = dataNascTxt.getEditText().getText().toString();
+            String pattern = "dd/MM/yyyy";
+            SimpleDateFormat formatador = new SimpleDateFormat(pattern);
 
+            try {
+                Date diaNasc = formatador.parse(nascimentoStr);
+
+                Usuario novoUsuario = new Usuario(nome, endereco, diaNasc, email, telefone, cpf, descricao, senha, media);
+
+                comparaExistenciaDados(novoUsuario);
+
+            } catch (ParseException ex) {
+                System.err.println("Erro no formato da data...");
+            }
+
+        } else {
+            senhaConfirmTxt.setError("As senhas não combinam");
+        }
     }
 
     private void comparaExistenciaDados(Usuario novo) {
